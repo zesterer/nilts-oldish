@@ -1,0 +1,24 @@
+#################################################
+#################################################
+##  This is simply a personal plan for myself  ##
+##  that helps me while I'm developing Nilts.  ##
+##  It is by not by any means official and is  ##
+##  usually inaccurate and incoherent. I dont  ##
+##  recommend you trust anything it says, but  ##
+##  read it if you so wish. It may give clues  ##
+##  about features I plan on adding to Nilts.  ##
+##                                             ##
+#################################################
+#################################################
+
+Class Structure
+===============
+
+Ownership Structure
+===================
+
+The 'Macro'
+===========
+
+Procedural Stuff
+================

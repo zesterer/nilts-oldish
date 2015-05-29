@@ -37,9 +37,17 @@ This will clone a copy of the Nilts repository into the current directory.
 
 *Assuming you've just downloaded Nilts via the methods shown above*
 
-Navigate to the Nilts build directory as follows.
+Navigate to the Nilts root directory as follows.
 
-`cd nilts/build/`
+`cd nilts/`
+
+Create a build directory as follows.
+
+`mkdir build/`
+
+Navigate to the build directory as follows.
+
+`cd build`
 
 Use cmake to ready the source for compilation as follows.
 

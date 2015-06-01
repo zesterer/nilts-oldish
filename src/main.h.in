@@ -1,7 +1,7 @@
 #ifndef NILTS_MAIN_H
 #define NILTS_MAIN_H
 
-//----LOCAL----
+//----STANDARD----
 #include "string"
 
 using namespace std;

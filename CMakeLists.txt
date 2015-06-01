@@ -40,6 +40,7 @@ include_directories(
 set(SOURCE_FILES
 src/main.cpp
 src/core/application.cpp
+src/core/window.cpp
 )
 
 #Take the code and turn it into the executable

@@ -16,24 +16,13 @@ namespace Nilts
 			ERROR
 		};
 
+		string output_strings[] = {"OUTPUT", "DEBUG", "ERROR"};
+
 		void output(string message, OutputType type = OutputType::DEBUG)
 		{
 			if ((DEBUG_ENABLED && type == OutputType::DEBUG) || type != OutputType::DEBUG)
 			{
-				string output_tag;
-
-				switch(type)
-				{
-					case (OutputType::INFO) :
-						output_tag = "OUTPUT";
-						break;
-					case (OutputType::DEBUG) :
-						output_tag = "DEBUG";
-						break;
-					case (OutputType::ERROR) :
-						output_tag = "ERROR";
-						break;
-				}
+				string output_tag = output_strings[type];
 
 				cout << "[" << output_tag << "]: " << message << endl;
 			}

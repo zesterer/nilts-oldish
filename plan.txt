@@ -1,5 +1,6 @@
 #################################################
 #################################################
+##                                             ##
 ##  This is simply a personal plan for myself  ##
 ##  that helps me while I'm developing Nilts.  ##
 ##  It is by not by any means official and is  ##
@@ -14,8 +15,32 @@
 Class Structure
 ===============
 
+ns = namespace, cl = class, st = struct
+
+ns Nilts
+	ns Common
+		ns IO
+		ns Task
+	ns Core
+		cl Application
+	ns World
+		ns Terrain
+			st Voxel
+			st Region
+			cl Terrain
+		cl World
+		st VoxelPos
+		st EntityPos
+
 Ownership Structure
 ===================
+
+ns = namespace, cl = class, st = struct
+
+cl Application
+	cl World
+		cl
+	cl
 
 The 'Macro'
 ===========

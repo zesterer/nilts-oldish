@@ -1,6 +1,6 @@
 //----LOCAL----
 #include "application.h"
-#include "world/world.h"
+#include "micro/world.h"
 
 namespace Nilts
 {
@@ -8,7 +8,7 @@ namespace Nilts
 	{
 		Application::Application(AppConfig* config)
 		{
-			this->world = new World::World();
+			this->world = new Micro::World();
 		}
 
 		int Application::run()

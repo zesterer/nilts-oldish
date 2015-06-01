@@ -34,13 +34,12 @@ include_directories(
 "${PROJECT_SOURCE_DIR}/src/common/"
 "${PROJECT_SOURCE_DIR}/src/core/"
 "${PROJECT_SOURCE_DIR}/src/world/"
-"${PROJECT_SOURCE_DIR}/src/world/terrain"
+"${PROJECT_SOURCE_DIR}/src/micro/"
 )
 
 set(SOURCE_FILES
 src/main.cpp
 src/core/application.cpp
-src/world/terrain/region.cpp
 )
 
 #Take the code and turn it into the executable

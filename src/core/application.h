@@ -2,7 +2,7 @@
 #define NILTS_CORE_APPLICATION_H
 
 //----LOCAL----
-#include "world/world.h"
+#include "micro/world.h"
 
 //----STANDARD----
 #include "string"
@@ -24,7 +24,7 @@ namespace Nilts
 		{
 			vector<string> args;
 
-			World::World* world;
+			Micro::World* world;
 
 			public: Application(AppConfig* config);
 			public: int run();

@@ -19,16 +19,17 @@ namespace Nilts
 	{
 		class Window
 		{
-			public: uint16 width = 640 * 1.4;
-			public: uint16 height = 480 * 1.4;
-			public: string window_title = "Nilts";
+			public:
+				uint16 width = 640 * 1.4;
+				uint16 height = 480 * 1.4;
+				string window_title = "Nilts";
 
-			public: GLFWwindow* glfw_window;
+				GLFWwindow* glfw_window;
 
-			public: Window();
-			public: void close();
-			public: bool refresh();
-			public: void activate();
+				Window();
+				void close();
+				bool refresh();
+				void activate();
 		};
 	}
 }

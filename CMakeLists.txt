@@ -41,6 +41,9 @@ set(SOURCE_FILES
 src/main.cpp
 src/core/application.cpp
 src/core/window.cpp
+src/common/io.cpp
+src/core/client.cpp
+src/visual/camera.cpp
 )
 
 #Take the code and turn it into the executable

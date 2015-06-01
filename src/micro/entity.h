@@ -10,7 +10,8 @@ namespace Nilts
 	 {
 	 	class Entity
 	 	{
-	 		FloatPos pos;
+	 		public:
+				FloatPos pos;
 	 	};
 	 }
 }

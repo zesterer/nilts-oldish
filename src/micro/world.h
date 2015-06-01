@@ -19,20 +19,23 @@ namespace Nilts
 	{
 		struct Voxel
 		{
-			uint16 type;
+			public:
+				uint16 type;
 		};
 
 		struct Region
 		{
-			IntPos pos;
-			Voxel voxels[NILTS_REGION_SIZE][NILTS_REGION_SIZE][NILTS_REGION_SIZE];
-			Visual::Data::Mesh* mesh;
+			public:
+				IntPos pos;
+				Voxel voxels[NILTS_REGION_SIZE][NILTS_REGION_SIZE][NILTS_REGION_SIZE];
+				Visual::Data::Mesh* mesh;
 		};
 
 		class World
 		{
-            map<IntPos, Region> regions;
-            forward_list<Entity> entities;
+			public:
+				map<IntPos, Region> regions;
+				forward_list<Entity> entities;
 		};
 	}
 }

@@ -1,12 +1,13 @@
 #ifndef NILTS_CORE_APPLICATION_H
 #define NILTS_CORE_APPLICATION_H
 
-//----LOCAL----
-#include "micro/world.h"
-
 //----STANDARD----
 #include "string"
 #include "vector"
+
+//----LOCAL----
+#include "micro/world.h"
+#include "client.h"
 
 using namespace std;
 
@@ -16,18 +17,21 @@ namespace Nilts
 	{
 		struct AppConfig
 		{
-			//Should we be running a console server?
-			bool server_not_client = false;
+			public:
+				//Should we be running a console server?
+				bool server_not_client = false;
 		};
 
 		class Application
 		{
-			vector<string> args;
+			public:
+				vector<string> args;
+				bool running = true;
 
-			Micro::World* world;
+				Client* client;
 
-			public: Application(AppConfig* config);
-			public: int run();
+				Application(AppConfig* config);
+				int run();
 		};
 	}
 }

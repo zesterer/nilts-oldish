@@ -9,26 +9,16 @@ using namespace std;
 namespace Nilts
 {
 	//Define the program version (Will be changed by cmake on compile)
-	char VERSION_MAJOR = @NILTS_VERSION_MAJOR@;
-	char VERSION_MINOR = @NILTS_VERSION_MINOR@;
-	char VERSION_RELEASE = @NILTS_VERSION_RELEASE@;
+	#define NILTS_VERSION_MAJOR @NILTS_VERSION_MAJOR@
+	#define NILTS_VERSION_MINOR @NILTS_VERSION_MINOR@
+	#define NILTS_VERSION_RELEASE @NILTS_VERSION_RELEASE@
 
 	//Define basic program info
-	bool DEBUG_ENABLED = @NILTS_DEBUG_ENABLED@;
+	#define NILTS_DEBUG_ENABLED @NILTS_DEBUG_ENABLED@
 
-	char* getVersionArray()
-	{
-		static char version[3];
-		version[0] = VERSION_MAJOR;
-		version[1] = VERSION_MINOR;
-		version[2] = VERSION_RELEASE;
-		return version;
-	}
+	char* getVersionArray();
 
-	string getVersionString()
-	{
-		return to_string(VERSION_MAJOR) + "." + to_string(VERSION_MINOR) + "." + to_string(VERSION_RELEASE);
-	}
+	string getVersionString();
 }
 
 #endif // NILTS_MAIN_H

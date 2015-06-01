@@ -1,6 +1,5 @@
 //----STANDARD----
 #include "string"
-#include "iostream"
 
 //----LOCAL----
 #include "main.h"
@@ -20,13 +19,25 @@ namespace Nilts
 		//Read the arguments
 		checkArguments(config, argc, argv);
 
-		IO::output("Hello, World! " + getVersionString());
-
 		//Create the application with the specified config
 		Core::Application* application;
 		application = new Core::Application(config);
 
 		return application->run();
+	}
+
+	char* getVersionArray()
+	{
+		static char version[3];
+		version[0] = NILTS_VERSION_MAJOR;
+		version[1] = NILTS_VERSION_MINOR;
+		version[2] = NILTS_VERSION_RELEASE;
+		return version;
+	}
+
+	string getVersionString()
+	{
+		return to_string(NILTS_VERSION_MAJOR) + "." + to_string(NILTS_VERSION_MINOR) + "." + to_string(NILTS_VERSION_RELEASE);
 	}
 }
 

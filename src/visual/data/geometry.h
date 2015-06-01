@@ -24,20 +24,23 @@ namespace Nilts
 		{
 			struct Vertex
 			{
-				glm::vec3 pos;
-				glm::vec3 col;
-				glm::vec2 tex;
-				glm::vec3 norm;
+				public:
+					glm::vec3 pos;
+					glm::vec3 col;
+					glm::vec2 tex;
+					glm::vec3 norm;
 			};
 
 			struct Polygon
 			{
-				Vertex a, b, c;
+				public:
+					Vertex a, b, c;
 			};
 
 			class Mesh
 			{
-				vector<Polygon> polygons;
+				public:
+					vector<Polygon> polygons;
 			};
 		}
 	}

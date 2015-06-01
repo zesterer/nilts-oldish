@@ -1,8 +1,17 @@
 #ifndef NILTS_MICRO_WORLD_H
 #define NILTS_MICRO_WORLD_H
 
+//----STANDARD----
+#include "map"
+#include "forward_list"
+
 //----LOCAL----
 #include "common/types.h"
+#include "common/constants.h"
+#include "entity.h"
+#include "visual/data/geometry.h"
+
+using namespace std;
 
 namespace Nilts
 {
@@ -11,12 +20,19 @@ namespace Nilts
 		struct Voxel
 		{
 			uint16 type;
-			uint16 data;
+		};
+
+		struct Region
+		{
+			IntPos pos;
+			Voxel voxels[NILTS_REGION_SIZE][NILTS_REGION_SIZE][NILTS_REGION_SIZE];
+			Visual::Data::Mesh* mesh;
 		};
 
 		class World
 		{
-
+            map<IntPos, Region> regions;
+            forward_list<Entity> entities;
 		};
 	}
 }

@@ -1,19 +1,31 @@
 # Nilts
 *The* procedurally generated game.
 
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Current Development Status: HEAVY DEVELOPMENT ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Current Version: 0.0.0 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
 ### What is Nilts?
 
 Nilts is a 3D game set within a mythical world. Designed from the start with multi-player in mind, Nilts is a game designed to be as involving and complex as is possible for a game.
 
-Most of the content within the game is procedurally generated at runtime - anything from the plot, plants, terrain, NPC AI, names, species, political groups, weapons, foodstuffs, biomes, caves, dungeons, buildings, hamlets, villages, towns, cities, paths, trade links, boats, airships, other vehicles to animals, vegitation, forests, rivers, waterfalls, oceans, lakes, fjords, the sky, literature, languages, speech, customs, rituals, religions, cultural groups, clothing, armour and abilities. In Nilts, you get a different experience every time you play.
+Most of the content within the game is procedurally generated at runtime - anything from the plot, plants, terrain, NPC AI, names, species, political groups, weapons, foodstuffs, biomes, caves, dungeons, buildings, hamlets, villages, towns, cities, paths, trade links, boats, airships and other vehicles to animals, vegitation, forests, rivers, waterfalls, oceans, lakes, fjords, the sky, literature, languages, speech, customs, rituals, religions, cultural groups, clothing, armour and abilities. In Nilts, you get a different experience every time you play.
 
 ### Why make Nilts procedurally generated?
 
 Nilts is designed to be this way for several reasons:
 
-- I'm a terrible artist and can't afford a good one.
 - Procedurally generated content is far more varied than anything a human could ever concieve.
-- Generating content on the fly means a more lightweight game with more space for visual effects and content.
+- Generating content on the fly means a more lightweight game with more space for visual effects and procedural content.
+- I'm a terrible artist and can't afford a good one.
+- Procedural content means I spend less time building assets and more time actually writing software that builds the content.
 
 ### What platforms does Nilts run on?
 
@@ -96,3 +108,10 @@ That's great. Post it in the issues section (please label it as an enhancement) 
 ### I want to donate and support development
 
 No you don't. There are people dying all over the world because they can't get access to clean drinking water and fulfill their basic human needs. There are people working under conditions that amount to little more than slavery simply to keep their families alive. If you want to help make me happy, donate some money to a reputable charity who will actually change things. I don't need money, but there are many people in this world who do.
+
+### Credits
+
+There are many people who have aided me in development on Nilts, and no doubt this list will grow as I develop further. Here are just a few:
+
+- A certain Quint Thrithe
+- The many people I've asked questions to on IRC (##c++, ##opengl, ##c, etc.)

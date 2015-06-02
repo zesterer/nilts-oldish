@@ -1,12 +1,12 @@
-#ifndef NILTS_MICRO_ENTITY_H
-#define NILTS_MICRO_ENTITY_H
+#ifndef NILTS_WORLD_ENTITY_H
+#define NILTS_WORLD_ENTITY_H
 
 //----LOCAL----
 #include "common/types.h"
 
 namespace Nilts
 {
-	 namespace Micro
+	 namespace World
 	 {
 	 	class Entity
 	 	{
@@ -16,4 +16,4 @@ namespace Nilts
 	 }
 }
 
-#endif // NILTS_MICRO_ENTITY_H
+#endif // NILTS_WORLD_ENTITY_H

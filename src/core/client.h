@@ -3,6 +3,7 @@
 
 //----LOCAL----
 #include "window.h"
+#include "visual/scene.h"
 
 namespace Nilts
 {
@@ -13,7 +14,10 @@ namespace Nilts
 			public:
 				Window* window;
 
+				Visual::Scene* scene;
+
 				Client();
+				void close();
 				bool run();
 		};
 	}

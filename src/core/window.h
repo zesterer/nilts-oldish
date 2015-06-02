@@ -29,7 +29,7 @@ namespace Nilts
 				Window();
 				void close();
 				bool refresh();
-				void activate();
+				void enable();
 		};
 	}
 }

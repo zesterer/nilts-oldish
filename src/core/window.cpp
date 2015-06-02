@@ -27,9 +27,9 @@ namespace Nilts
 			IO::test(this->glfw_window != NULL, "Creating window", true);
 		}
 
-		void Window::activate()
+		void Window::enable()
 		{
-			IO::output("Activating Window");
+			IO::output("Enabling Window");
 
 			glfwMakeContextCurrent(this->glfw_window);
 		}
@@ -40,7 +40,7 @@ namespace Nilts
 
 			glfwTerminate();
 
-			IO::output("Closing Window");
+			IO::output("Closed Window");
 		}
 
 		bool Window::refresh()

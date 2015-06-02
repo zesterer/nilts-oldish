@@ -44,6 +44,8 @@ src/core/window.cpp
 src/common/io.cpp
 src/core/client.cpp
 src/visual/camera.cpp
+src/visual/scene.cpp
+src/common/types.cpp
 )
 
 #Take the code and turn it into the executable

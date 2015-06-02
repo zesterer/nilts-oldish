@@ -1,5 +1,5 @@
-#ifndef NILTS_MICRO_WORLD_H
-#define NILTS_MICRO_WORLD_H
+#ifndef NILTS_WORLD_WORLD_H
+#define NILTS_WORLD_WORLD_H
 
 //----STANDARD----
 #include "map"
@@ -36,8 +36,13 @@ namespace Nilts
 			public:
 				map<IntPos, Region> regions;
 				forward_list<Entity> entities;
+
+				uint32 tick;
+
+				World();
+				void tick();
 		};
 	}
 }
 
-#endif // NILTS_MICRO_WORLD_H
+#endif // NILTS_WORLD_WORLD_H

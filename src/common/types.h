@@ -1,6 +1,12 @@
 #ifndef NILTS_COMMON_TYPES_H
 #define NILTS_COMMON_TYPES_H
 
+//----LIBRARY----
+#include "glm/glm.hpp"
+#include "glm/vec3.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 namespace Nilts
 {
 	/*
@@ -27,12 +33,44 @@ namespace Nilts
 
 	struct IntPos
 	{
-		int32 x, y, z;
+		int32 x = 0;
+		int32 y = 0;
+		int32 z = 0;
 	};
 
 	struct FloatPos
 	{
-		float64 x, y, z;
+		float64 x = 0.0;
+		float64 y = 0.0;
+		float64 z = 0.0;
+	};
+
+	struct Rotation
+	{
+		float32 x = 0.0;
+		float32 y = 0.0;
+		float32 z = 0.0;
+	};
+
+	struct Scale
+	{
+		float32 x = 0.0;
+		float32 y = 0.0;
+		float32 z = 0.0;
+	};
+
+	struct State
+	{
+		FloatPos pos;
+		Rotation rot;
+		Scale scale;
+	};
+
+	struct Matrix
+	{
+		glm::mat4x4 matrix;
+
+		void updateFrom(State state);
 	};
 }
 

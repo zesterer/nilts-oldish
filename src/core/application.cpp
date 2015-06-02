@@ -1,6 +1,5 @@
 //----LOCAL----
 #include "application.h"
-#include "micro/world.h"
 #include "common/io.h"
 
 namespace Nilts
@@ -21,6 +20,8 @@ namespace Nilts
 			{
 				this->running &= this->client->run();
 			}
+
+			IO::output("Closed Application");
 
             return 0;
 		}

@@ -6,7 +6,6 @@
 #include "vector"
 
 //----LOCAL----
-#include "micro/world.h"
 #include "client.h"
 
 using namespace std;

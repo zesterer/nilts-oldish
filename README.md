@@ -2,14 +2,11 @@
 *The* procedurally generated game.
 
 ```
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Current Development Status: HEAVY DEVELOPMENT ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-```
-```
-┏━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Current Version: 0.0.0 ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Current Development Status:  ┃ HEAVY ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━┫
+┃ Current Development Version: ┃ 0.0.0 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━┛
 ```
 
 ### What is Nilts?

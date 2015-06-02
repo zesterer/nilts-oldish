@@ -46,6 +46,7 @@ src/core/client.cpp
 src/visual/camera.cpp
 src/visual/scene.cpp
 src/common/types.cpp
+src/visual/data/shader.cpp
 )
 
 #Take the code and turn it into the executable

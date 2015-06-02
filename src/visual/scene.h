@@ -11,6 +11,7 @@
 //----LOCAL----
 #include "camera.h"
 #include "data/object.h"
+#include "data/shader.h"
 
 using namespace gl;
 
@@ -24,6 +25,8 @@ namespace Nilts
 				Camera* camera;
 
 				unordered_set<Data::Object*> active_objects;
+
+				Data::Shader shader;
 
 				Scene();
 				void enable();

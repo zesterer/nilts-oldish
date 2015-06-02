@@ -1,3 +1,6 @@
+//----STANDARD----
+#include "string"
+
 //----LIBRARY----
 #include "glbinding/gl/gl.h"
 #include "glbinding/Binding.h"
@@ -31,6 +34,10 @@ namespace Nilts
 			//Enable the depth buffer
 			glEnable(GL_DEPTH_TEST);
 			glDepthFunc(GL_LESS);
+
+			//Create the shader
+			this->shader.loadFromFiles("../shaders/std-vertex-shader.glsl", "../shaders/std-fragment-shader.glsl");
+			this->shader.enable();
 		}
 
 		void Scene::render()

@@ -15,17 +15,24 @@ namespace Nilts
 	{
 		class Camera
 		{
-			public: glm::vec3 position;
-			public: glm::vec3 rotation;
-			public: glm::mat4 matrix;
-			public: glm::mat4 perspective_matrix;
+			public:
+				/*
+				The camera doesn't use my built-in matrix
+				or state type because the tranformations
+				required are rather different (not least
+				because they're completely reversed).
+				*/
+				glm::vec3 position;
+				glm::vec3 rotation;
+				glm::mat4 matrix;
+				glm::mat4 perspective_matrix;
 
-			public: float32 fov = 0.95;
-			public: float32 min_render = 0.01;
-			public: float32 max_render = 100;
+				float32 fov = 0.95;
+				float32 min_render = 0.01;
+				float32 max_render = 100;
 
-			public: Camera();
-			public: void update();
+				Camera();
+				void update();
 		};
 	}
 }

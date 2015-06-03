@@ -53,8 +53,9 @@ float getDiffuse(vec4 vector, float ambiance)
 
 vec3 getTexture()
 {
+	return FRAG_COL;
 	if (FRAG_UV == vec2(-1.0, -1.0)) //If there's no texture
-		return FRAG_COL * vec3(1.0, 1.0, 1.0);
+		return FRAG_COL;
 	else //It's got a texture!
 		return FRAG_COL * texture2DProjLod(TEXTURE_SAMPLER, vec3(FRAG_UV, 1.0), 0.0).rgb;
 }
@@ -128,9 +129,6 @@ void main()
 	//Initialise the normal
 	MOD_NORM = FRAG_NORM;
 
-	//Get the texture colour
-	vec3 tex = getTexture();
-
 	//Loop through all the lights
 	for (int count = 0; count < 16; count ++)
 	{
@@ -153,5 +151,5 @@ void main()
 		specular = floor(specular * 2.0) / 2.0;
 	}
 
-	COLOR = tex * diffuse + specular;
+	COLOR = getTexture() * diffuse + specular;
 }

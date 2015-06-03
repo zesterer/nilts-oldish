@@ -4,6 +4,8 @@
 //----LOCAL----
 #include "geometry.h"
 #include "common/types.h"
+#include "bufferedmesh.h"
+#include "material.h"
 
 namespace Nilts
 {
@@ -17,7 +19,11 @@ namespace Nilts
 					State state;
 					Matrix matrix;
 
-					Mesh* mesh;
+					BufferedMesh* mesh;
+					Material* material;
+
+					Object();
+					void update();
 			};
 		}
 	}

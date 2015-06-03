@@ -8,6 +8,7 @@
 
 //----LOCAL----
 #include "common/types.h"
+#include "core/window.h"
 
 namespace Nilts
 {
@@ -27,12 +28,16 @@ namespace Nilts
 				glm::mat4 matrix;
 				glm::mat4 perspective_matrix;
 
+				//For input - should be temporary!
+				Core::Window* window;
+
 				float32 fov = 0.95;
 				float32 min_render = 0.01;
 				float32 max_render = 100;
 
 				Camera();
 				void update();
+				void grabInputs();
 		};
 	}
 }

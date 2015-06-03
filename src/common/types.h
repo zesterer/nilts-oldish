@@ -54,16 +54,16 @@ namespace Nilts
 
 	struct Scale
 	{
-		float32 x = 0.0;
-		float32 y = 0.0;
-		float32 z = 0.0;
+		float32 x = 1.0;
+		float32 y = 1.0;
+		float32 z = 1.0;
 	};
 
 	struct State
 	{
-		FloatPos pos;
-		Rotation rot;
-		Scale scale;
+		glm::vec3 pos = glm::vec3(0.0, 0.0, 0.0);
+		glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0);
+		glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
 	};
 
 	struct Matrix

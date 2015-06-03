@@ -3,6 +3,7 @@
 
 //----STANDARD----
 #include "unordered_set"
+#include "vector"
 
 //----LIBRARY----
 #include "glbinding/gl/gl.h"
@@ -11,7 +12,10 @@
 //----LOCAL----
 #include "camera.h"
 #include "data/object.h"
+#include "data/bufferedmesh.h"
 #include "data/shader.h"
+#include "data/light.h"
+#include "data/material.h"
 
 using namespace gl;
 
@@ -24,14 +28,18 @@ namespace Nilts
 			public:
 				Camera* camera;
 
-				unordered_set<Data::Object*> active_objects;
+				unordered_set<Data::Object*> objects;
 
-				Data::Shader shader;
+				vector<Data::Light> lights;
+
+				Data::Shader* shader;
 
 				Scene();
 				void enable();
 				void render();
+				void update();
 
+				void assignLights();
 				void registerObject(Data::Object* object);
 				void deregisterObject(Data::Object* object);
 		};

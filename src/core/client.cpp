@@ -16,6 +16,7 @@ namespace Nilts
 			this->window->enable();
 
 			this->scene = new Visual::Scene();
+			this->scene->camera->window = this->window;
 			this->scene->enable();
 		}
 

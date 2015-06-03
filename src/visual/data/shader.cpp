@@ -24,7 +24,7 @@ namespace Nilts
 			void Shader::loadFromFiles(string vertex_file_path, string fragment_file_path)
 			{
 				// Read the Vertex Shader code from the file
-				IO::output("Loading Vertex Shader Code");
+				IO::output("Loading Vertex Shader Code from:" + vertex_file_path);
 				string VertexShaderCode;
 				ifstream VertexShaderStream(vertex_file_path.c_str(), ios::in);
 				if(VertexShaderStream.is_open())
@@ -36,7 +36,7 @@ namespace Nilts
 				}
 
 				// Read the Fragment Shader code from the file
-				IO::output("Loading Fragment Shader Code");
+				IO::output("Loading Fragment Shader Code from: " + fragment_file_path);
 				string FragmentShaderCode;
 				ifstream FragmentShaderStream(fragment_file_path.c_str(), ios::in);
 				if(FragmentShaderStream.is_open())

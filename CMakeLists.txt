@@ -47,6 +47,9 @@ src/visual/camera.cpp
 src/visual/scene.cpp
 src/common/types.cpp
 src/visual/data/shader.cpp
+src/visual/data/bufferedmesh.cpp
+src/visual/data/material.cpp
+src/visual/data/object.cpp
 )
 
 #Take the code and turn it into the executable

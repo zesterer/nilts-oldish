@@ -53,7 +53,12 @@ float getDiffuse(vec4 vector, float ambiance)
 
 vec3 getTexture()
 {
-	return FRAG_COL;
+	return mix(vec3(1.0, 0.8, 0.5), vec3(0.0, 1.0, 0.0), dot((MODEL_MATRIX * MOD_NORM).xyz, vec3(0.0, 0.0, 1.0)));
+
+	//No proper texture has been loaded in, so revert to colours
+	if (textureSize(TEXTURE_SAMPLER, 0) == ivec2(1, 1))
+		return FRAG_COL;
+
 	if (FRAG_UV == vec2(-1.0, -1.0)) //If there's no texture
 		return FRAG_COL;
 	else //It's got a texture!

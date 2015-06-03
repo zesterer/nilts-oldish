@@ -17,7 +17,7 @@ namespace Nilts
 	{
 		Camera::Camera()
 		{
-			this->position = glm::vec3(0.0, -6.0, 4.0);
+			this->position = glm::vec3(64.0, 64.0, 64.0);
 			this->rotation = glm::vec3(0.0, 0.3, 0.0);
 		}
 
@@ -44,28 +44,28 @@ namespace Nilts
 			///*Testing - Check keyboard
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_D) == GLFW_PRESS)
 			{
-				this->position.x += 0.05 * sin(this->rotation.x + M_PI / 2);
-				this->position.y += 0.05 * cos(this->rotation.x + M_PI / 2);
+				this->position.x += 0.15 * sin(this->rotation.x + M_PI / 2);
+				this->position.y += 0.15 * cos(this->rotation.x + M_PI / 2);
 			}
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_A) == GLFW_PRESS)
 			{
-				this->position.x += 0.05 * sin(this->rotation.x - M_PI / 2);
-				this->position.y += 0.05 * cos(this->rotation.x - M_PI / 2);
+				this->position.x += 0.15 * sin(this->rotation.x - M_PI / 2);
+				this->position.y += 0.15 * cos(this->rotation.x - M_PI / 2);
 			}
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_W) == GLFW_PRESS)
 			{
-				this->position.x += 0.05 * sin(this->rotation.x);
-				this->position.y += 0.05 * cos(this->rotation.x);
+				this->position.x += 0.15 * sin(this->rotation.x);
+				this->position.y += 0.15 * cos(this->rotation.x);
 			}
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_S) == GLFW_PRESS)
 			{
-				this->position.x += 0.05 * sin(this->rotation.x + M_PI);
-				this->position.y += 0.05 * cos(this->rotation.x + M_PI);
+				this->position.x += 0.15 * sin(this->rotation.x + M_PI);
+				this->position.y += 0.15 * cos(this->rotation.x + M_PI);
 			}
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_M) == GLFW_PRESS)
-				this->position.z += 0.03;
+				this->position.z += 0.15;
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_N) == GLFW_PRESS)
-				this->position.z -= 0.03;
+				this->position.z -= 0.15;
 
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 				this->rotation.x += 0.03;

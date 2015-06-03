@@ -23,6 +23,7 @@
 #include "data/shader.h"
 #include "common/types.h"
 #include "camera.h"
+#include "data/meshedvoxelfield.h"
 
 using namespace std;
 using namespace gl;
@@ -57,17 +58,28 @@ namespace Nilts
 
 			Data::Light sun;
 			sun.type = Data::LightType::DIRECTIONAL;
-			sun.colour = {1.0, 1.0, 1.0};
+			sun.colour = {0.2, 0.2, 0.2};
 			sun.position = {1.0, 1.0, -1.0};
-			sun.ambiance = 0.3;
+			sun.ambiance = 0.0;
 			this->lights.push_back(sun);
+
+			Data::Light othersun;
+			othersun.type = Data::LightType::DIRECTIONAL;
+			othersun.colour = {0.5, 0.5, 0.4};
+			othersun.position = {-1.0, -1.0, -1.0};
+			othersun.ambiance = 0.15;
+			this->lights.push_back(othersun);
 
 			static Data::Object* object = new Data::Object();
 			object->mesh->loadFromOBJ("../mickey.obj");
-			object->state.rot.y = M_PI / 2;
-			object->state.scale = glm::vec3(0.5, 0.5, 0.5);
 			object->update();
 			this->registerObject(object);
+
+			static Nilts::Data::MeshedVoxelField* field = new Nilts::Data::MeshedVoxelField({256, 256, 32});
+			field->extract();
+			object->material->shininess = 5.0;
+			object->mesh = field->mesh;
+
 		}
 
 		void Scene::render()

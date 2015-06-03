@@ -64,12 +64,13 @@ namespace Nilts
 					if (c_line[0] == 'v' && c_line[1] == ' ') //Deal with the vertex positions
 					{
 						glm::vec3 pos;
-						glm::vec3 col = {1.0, 1.0, 1.0}; //Default to white, just in case there is no colour data
+						glm::vec3 col;
 
 						bool matches = (sscanf(c_line, "v %f %f %f %f %f %f", &pos.x, &pos.y, &pos.z, &col.r, &col.g, &col.b) == 6);
 
 						if (!matches) //It has no colour
 						{
+							col = glm::vec3(1.0, 1.0, 1.0); //Let's assume it's white
 							matches = (sscanf(c_line, "v %f %f %f", &pos.x, &pos.y, &pos.z) == 3);
 						}
 
@@ -197,8 +198,10 @@ namespace Nilts
 						poly.b.norm = tmp_norm[face.b_norm - 1];
 						poly.c.norm = tmp_norm[face.c_norm - 1];
 					}
-					else //Otherwise, calculate out own normals (not smoothed)
+					else //Otherwise, calculate our own normals (not smoothed)
 					{
+						poly.correctNormals();
+						/*
 						glm::vec3 a = glm::vec3(tmp_pos[face.a_pos - 1].x, tmp_pos[face.a_pos - 1].y, tmp_pos[face.a_pos - 1].z);
 						glm::vec3 b = glm::vec3(tmp_pos[face.b_pos - 1].x, tmp_pos[face.b_pos - 1].y, tmp_pos[face.b_pos - 1].z);
 						glm::vec3 c = glm::vec3(tmp_pos[face.c_pos - 1].x, tmp_pos[face.c_pos - 1].y, tmp_pos[face.c_pos - 1].z);
@@ -207,6 +210,7 @@ namespace Nilts
 						poly.a.norm = {n0.x, n0.y, n0.z};
 						poly.b.norm = {n0.x, n0.y, n0.z};
 						poly.c.norm = {n0.x, n0.y, n0.z};
+						*/
 					}
 
 					this->polygons.push_back(poly);

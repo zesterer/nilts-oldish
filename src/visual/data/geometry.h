@@ -25,16 +25,18 @@ namespace Nilts
 			struct Vertex
 			{
 				public:
-					glm::vec3 pos;
-					glm::vec3 col;
-					glm::vec2 tex;
-					glm::vec3 norm;
+					glm::vec3 pos = glm::vec3(0.0, 0.0, 0.0);
+					glm::vec3 col = glm::vec3(1.0, 1.0, 1.0);
+					glm::vec2 tex = glm::vec2(-1.0, -1.0);
+					glm::vec3 norm = glm::vec3(0.0, 0.0, 0.0);
 			};
 
 			struct Polygon
 			{
 				public:
 					Vertex a, b, c;
+
+					void correctNormals();
 			};
 
 			struct Face

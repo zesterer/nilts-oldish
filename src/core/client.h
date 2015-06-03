@@ -4,6 +4,7 @@
 //----LOCAL----
 #include "window.h"
 #include "visual/scene.h"
+#include "world/world.h"
 
 namespace Nilts
 {
@@ -12,6 +13,8 @@ namespace Nilts
 		class Client
 		{
 			public:
+				World::World* world;
+
 				Window* window;
 
 				Visual::Scene* scene;

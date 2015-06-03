@@ -2,45 +2,36 @@
 #define NILTS_WORLD_WORLD_H
 
 //----STANDARD----
-#include "map"
+#include "vector"
 #include "forward_list"
 
 //----LOCAL----
 #include "common/types.h"
 #include "common/constants.h"
 #include "entity.h"
-#include "visual/data/geometry.h"
+#include "region.h"
+#include "visual/data/object.h"
 
 using namespace std;
 
 namespace Nilts
 {
-	namespace Micro
+	namespace World
 	{
-		struct Voxel
-		{
-			public:
-				uint16 type;
-		};
-
-		struct Region
-		{
-			public:
-				IntPos pos;
-				Voxel voxels[NILTS_REGION_SIZE][NILTS_REGION_SIZE][NILTS_REGION_SIZE];
-				Visual::Data::Mesh* mesh;
-		};
-
 		class World
 		{
 			public:
-				map<IntPos, Region> regions;
+				IntPos camera;
+
+				vector<Region> regions;
 				forward_list<Entity> entities;
 
-				uint32 tick;
+				uint32 current_tick;
 
 				World();
 				void tick();
+				bool regionLoaded(IntPos pos);
+				void loadRegion(IntPos pos);
 		};
 	}
 }

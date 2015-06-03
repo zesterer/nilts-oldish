@@ -3,6 +3,7 @@
 #include "window.h"
 #include "common/io.h"
 #include "visual/scene.h"
+#include "world/world.h"
 
 namespace Nilts
 {
@@ -11,6 +12,8 @@ namespace Nilts
 		Client::Client()
 		{
 			IO::output("Creating Client");
+
+			this->world = new World::World();
 
 			this->window = new Window();
 			this->window->enable();
@@ -29,6 +32,9 @@ namespace Nilts
 		bool Client::run()
 		{
 			bool running = true;
+
+			//Tick the world
+			this->world->tick();
 
 			//Render the scene
 			this->scene->render();

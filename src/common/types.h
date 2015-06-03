@@ -31,32 +31,35 @@ namespace Nilts
 	typedef float float32;
 	typedef double float64;
 
+	struct IntVec2
+	{
+		int32 x, y;
+	};
+
+	struct IntVec3
+	{
+		int32 x, y, z;
+
+		int32 sum();
+	};
+
+	struct IntVec4
+	{
+		int32 x, y, z, w;
+	};
+
 	struct IntPos
 	{
 		int32 x = 0;
 		int32 y = 0;
 		int32 z = 0;
-	};
 
-	struct FloatPos
-	{
-		float64 x = 0.0;
-		float64 y = 0.0;
-		float64 z = 0.0;
-	};
-
-	struct Rotation
-	{
-		float32 x = 0.0;
-		float32 y = 0.0;
-		float32 z = 0.0;
-	};
-
-	struct Scale
-	{
-		float32 x = 1.0;
-		float32 y = 1.0;
-		float32 z = 1.0;
+		bool operator==(const IntPos &pos) const
+		{
+			if (pos.x == this->x && pos.y == this->y && pos.z == this->z)
+				return true;
+			return false;
+		}
 	};
 
 	struct State

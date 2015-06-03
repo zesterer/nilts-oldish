@@ -9,6 +9,11 @@
 
 namespace Nilts
 {
+	int32 IntVec3::sum()
+	{
+		return this->x * this->y * this->z;
+	}
+
 	void Matrix::updateFrom(State state)
 	{
 		//Clear the matrix ready to change it

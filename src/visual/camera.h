@@ -33,7 +33,7 @@ namespace Nilts
 
 				float32 fov = 0.95;
 				float32 min_render = 0.01;
-				float32 max_render = 100;
+				float32 max_render = 1000;
 
 				Camera();
 				void update();

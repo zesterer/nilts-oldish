@@ -50,6 +50,12 @@ src/visual/data/shader.cpp
 src/visual/data/bufferedmesh.cpp
 src/visual/data/material.cpp
 src/visual/data/object.cpp
+src/world/generation/perlin.cpp
+src/world/region.cpp
+src/world/world.cpp
+src/data/voxelfield.cpp
+src/data/meshedvoxelfield.cpp
+src/visual/data/geometry.cpp
 )
 
 #Take the code and turn it into the executable

@@ -22,6 +22,8 @@ namespace Nilts
 				float32 getNoise(glm::vec4 pos, float32 octave);
 
 				float32 getPerlin(glm::vec4 pos, float32 initial, float32 octaves, float32 skip);
+
+				glm::vec3 getPerlinVector(glm::vec4 pos, float32 initial, float32 octaves, float32 skip);
 			};
 		}
 	}

@@ -8,6 +8,8 @@ namespace Nilts
 	{
 		VoxelField::VoxelField(IntVec3 dimensions)
 		{
+			this->voxels.reserve(dimensions.sum());
+
 			for (int32 count = 0; count < dimensions.sum(); count ++)
 				this->voxels.push_back(Voxel());
 

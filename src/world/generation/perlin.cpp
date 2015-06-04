@@ -57,6 +57,17 @@ namespace Nilts
 
 				return val;
 			}
+
+			glm::vec3 PerlinNoise::getPerlinVector(glm::vec4 pos, float32 initial, float32 octaves, float32 skip)
+			{
+				glm::vec3 noise;
+
+				noise.x = this->getPerlin(pos + glm::vec4(0.0, 0.0, 0.0, 0.0), initial, octaves, skip);
+				noise.y = this->getPerlin(pos + glm::vec4(0.0, 0.0, 0.0, 1.0), initial, octaves, skip);
+				noise.z = this->getPerlin(pos + glm::vec4(0.0, 0.0, 0.0, 2.0), initial, octaves, skip);
+
+				return noise;
+			}
 		}
 	}
 }

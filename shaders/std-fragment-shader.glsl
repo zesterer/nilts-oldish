@@ -149,6 +149,11 @@ void main()
 		}
 	}
 
+	if (getEffect(1) && true)
+	{
+		diffuse *= 1.0 - abs(getPerlin(FRAG_M_POS / 10.0, 2.0, 3.0, 1.0) + 1.0) * 0.25;
+	}
+
 	//Cel-shading
 	if (getEffect(0))
 	{

@@ -71,11 +71,10 @@ namespace Nilts
 			this->lights.push_back(othersun);
 
 			static Data::Object* object = new Data::Object();
-			object->mesh->loadFromOBJ("../mickey.obj");
 			object->update();
 			this->registerObject(object);
 
-			static Nilts::Data::MeshedVoxelField* field = new Nilts::Data::MeshedVoxelField({256, 256, 32});
+			static Nilts::Data::MeshedVoxelField* field = new Nilts::Data::MeshedVoxelField({256, 256, 128});
 			field->extract();
 			object->material->shininess = 5.0;
 			object->mesh = field->mesh;

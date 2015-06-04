@@ -42,7 +42,9 @@ namespace Nilts
 						Voxel* voxel = this->getVoxel(count);
 						glm::vec3 pos = glm::vec3((float32)count.x, (float32)count.y, (float32)count.z);
 
-						if ((noise.getPerlin(glm::vec4(pos.x / 1000.0, pos.y / 1000.0, 0.0, 3.0), 2.0, 3.0, 1.0) + 1.1) * 16.0 > pos.z)
+						glm::vec3 offset = glm::normalize(noise.getPerlinVector(glm::vec4(pos.x / 500.0, pos.y / 500.0, pos.z / 500.0, 7.0), 2.0, 3.0, 1.5));
+
+						if ((noise.getPerlin(glm::vec4((pos.x + 32.0 * offset.x) / 1000.0, (pos.y + 32.0 * offset.y) / 1000.0, 0.0 * offset.z, 2.0), 1.0, 3.0, 1.0) + 1.1) * 32.0 > pos.z)
 							voxel->data = 1;
 					}
 				}

@@ -20,6 +20,17 @@ namespace Nilts
 				this->b.norm = n0;
 				this->c.norm = n0;
 			}
+
+			void Polygon::invert()
+			{
+				//Swap the vertices around
+				Vertex temp = this->a;
+				this->a = this->c;
+				this->c = temp;
+
+				//Recalculate the normals
+				this->correctNormals();
+			}
 		}
 	}
 }

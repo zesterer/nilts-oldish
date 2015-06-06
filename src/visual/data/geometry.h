@@ -37,6 +37,7 @@ namespace Nilts
 					Vertex a, b, c;
 
 					void correctNormals();
+					void invert();
 			};
 
 			struct Face

@@ -1,5 +1,6 @@
 //----STANDARD----
 #include "string"
+#include <algorithm>
 
 //----LIBRARY----
 #include "glm/glm.hpp"
@@ -48,6 +49,7 @@ namespace Nilts
 						Data::Voxel* voxel = this->field->getVoxel(count);
 						glm::vec3 pos = glm::vec3((float32)(count.x + this->pos.x), (float32)(count.y + this->pos.y), (float32)(count.z + this->pos.z));
 
+						///*
 						glm::vec3 offset = noise.getPerlinVec3(glm::vec4(pos.x, pos.y, pos.z, 7.0), -7.5, 1.0, 1.0);
 
 						if ((noise.getPerlin(glm::vec4((pos.x + 96.0 * offset.x), (pos.y + 96.0 * offset.y), 0.0, 2.0), -8.5, 2.0, 1.0) + 3.0) * 48.0 > pos.z)
@@ -60,6 +62,15 @@ namespace Nilts
 							if (glm::abs(cave.x) < 0.1 && glm::abs(cave.y) < 0.08)
 								voxel->data = 0;
 						}
+
+						voxel->density = voxel->data;
+						//*/
+						/*
+						voxel->density = (uint8)(max(noise.getPerlin(glm::vec4(pos.x, pos.y, pos.z, 2.0), -7.5, 2.0, 1.0), 0.0f) * 255.0);
+
+						if (voxel->density != 0)
+							voxel->data = 1;
+						//*/
 					}
 				}
 			}

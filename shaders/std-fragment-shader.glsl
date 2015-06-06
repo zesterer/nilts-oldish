@@ -135,7 +135,7 @@ void main()
 	MOD_NORM = FRAG_NORM;
 
 	//Normal bump mapping
-	if (getEffect(1) && true)
+	if (getEffect(1) && false)
 	{
 		vec4 norm = vec4(0.0, 0.0, 0.0, 0.0);
 		vec3 pos = vec3(MODEL_MATRIX * FRAG_M_POS).xyz;

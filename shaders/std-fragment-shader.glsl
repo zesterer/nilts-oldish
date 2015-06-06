@@ -134,6 +134,21 @@ void main()
 	//Initialise the normal
 	MOD_NORM = FRAG_NORM;
 
+	//Normal bump mapping
+	if (getEffect(1) && true)
+	{
+		vec4 norm = vec4(0.0, 0.0, 0.0, 0.0);
+		vec3 pos = vec3(MODEL_MATRIX * FRAG_M_POS).xyz;
+
+		float lod = min(6.0, max(1.0, -1.0 / FRAG_POS.z * 100.0));
+
+		norm.x = getPerlin(vec4(pos, 1.0), 1.5, lod, 1.0);
+		norm.y = getPerlin(vec4(pos, 2.0), 1.5, lod, 1.0);
+		norm.z = getPerlin(vec4(pos, 3.0), 1.5, lod, 1.0);
+		norm = normalize(norm);
+		MOD_NORM = normalize(MOD_NORM + norm * 0.35);
+	}
+
 	//Loop through all the lights
 	for (int count = 0; count < 16; count ++)
 	{
@@ -149,7 +164,7 @@ void main()
 		}
 	}
 
-	if (getEffect(1) && true)
+	if (getEffect(1) && false)
 	{
 		diffuse *= 1.0 - abs(getPerlin(FRAG_M_POS / 10.0, 2.0, 3.0, 1.0) + 1.0) * 0.25;
 	}

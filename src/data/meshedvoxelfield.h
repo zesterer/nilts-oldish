@@ -1,6 +1,10 @@
 #ifndef NILTS_DATA_MESHEDVOXELFIELD_H
 #define NILTS_DATA_MESHEDVOXELFIELD_H
 
+//----LIBRARY----
+#include "glm/glm.hpp"
+#include "glm/vec3.hpp"
+
 //----LOCAL----
 #include "voxelfield.h"
 #include "visual/data/bufferedmesh.h"
@@ -12,10 +16,15 @@ namespace Nilts
 	{
 		class MeshedVoxelField : public VoxelField
 		{
+			/*
+			A class derived from VoxelField designed to represent both
+			a 3D voxel field and a it's accompanying polygon mesh.
+			*/
+
 			public:
 				Visual::Data::BufferedMesh* mesh;
 
-				MeshedVoxelField(IntVec3 dimensions);
+				MeshedVoxelField(glm::ivec3 size);
 				void extract();
 
 			private:

@@ -1,3 +1,7 @@
+//----LIBRARY----
+#include "glm/glm.hpp"
+#include "glm/vec3.hpp"
+
 //----LOCAL----
 #include "voxelfield.h"
 #include "common/types.h"
@@ -6,27 +10,27 @@ namespace Nilts
 {
 	namespace Data
 	{
-		VoxelField::VoxelField(IntVec3 dimensions)
+		VoxelField::VoxelField(glm::ivec3 size)
 		{
-			this->voxels.reserve(dimensions.sum());
+			this->voxels.reserve(size.x * size.y * size.z);
 
-			for (int32 count = 0; count < dimensions.sum(); count ++)
+			for (int32 count = 0; count < size.x * size.y * size.z; count ++)
 				this->voxels.push_back(Voxel());
 
-			this->dimensions = dimensions;
+			this->size = size;
 		}
 
-		Voxel* VoxelField::getVoxel(IntVec3 pos)
+		Voxel* VoxelField::getVoxel(glm::ivec3 pos)
 		{
-			if (pos.x < 0 || pos.x >= this->dimensions.x)
+			if (pos.x < 0 || pos.x >= this->size.x)
 				return &this->space;
-			if (pos.y < 0 || pos.y >= this->dimensions.y)
+			if (pos.y < 0 || pos.y >= this->size.y)
 				return &this->space;
-			if (pos.z < 0 || pos.z >= this->dimensions.z)
+			if (pos.z < 0 || pos.z >= this->size.z)
 				return &this->space;
 
-			int32 slice = this->dimensions.y * this->dimensions.z;
-			int32 depth = this->dimensions.z;
+			int32 slice = this->size.y * this->size.z;
+			int32 depth = this->size.z;
 
 			return &this->voxels[slice * pos.x + depth * pos.y + pos.z];
 		}

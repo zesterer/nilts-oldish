@@ -13,7 +13,7 @@ set (NILTS_VERSION_RELEASE 0)
 set (NILTS_DEBUG_ENABLED true)
 
 #Name of the project
-project(starclock)
+project(nilts)
 
 #Tell the compiler to include -std=c++11
 add_definitions(-std=c++11 -Wall)

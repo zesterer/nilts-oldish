@@ -1,3 +1,7 @@
+//----LIBRARY----
+#include "glm/glm.hpp"
+#include "glm/vec3.hpp"
+
 //----LOCAL----
 #include "world.h"
 #include "common/constants.h"
@@ -15,36 +19,17 @@ namespace Nilts
 
 		void World::tick()
 		{
-			for (int16 x = -4; x < 4; x ++)
-			{
-				for (int16 y = -4; y < 4; y ++)
-				{
-					for (int16 z = -4; z < 4; z ++)
-					{
-                        IntPos pos;
-                        pos.x = (this->camera.x / NILTS_REGION_SIZE) * NILTS_REGION_SIZE + x * NILTS_REGION_SIZE;
-                        pos.y = (this->camera.y / NILTS_REGION_SIZE) * NILTS_REGION_SIZE + y * NILTS_REGION_SIZE;
-                        pos.z = (this->camera.z / NILTS_REGION_SIZE) * NILTS_REGION_SIZE + z * NILTS_REGION_SIZE;
-
-						if (!this->regionLoaded(pos))
-						{
-							this->loadRegion(pos);
-						}
-					}
-				}
-			}
-
 			this->current_tick ++;
 		}
 
-		void World::loadRegion(IntPos pos)
+		void World::loadRegion(glm::ivec3 pos)
 		{
 			Region region;
 			region.pos = pos;
 			this->regions.push_back(region);
 		}
 
-		bool World::regionLoaded(IntPos pos)
+		bool World::regionLoaded(glm::ivec3 pos)
 		{
 			for (uint16 count = 0; count < this->regions.size(); count ++)
 			{

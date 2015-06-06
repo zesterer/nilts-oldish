@@ -25,15 +25,19 @@ namespace Nilts
 
 		class VoxelField
 		{
+			/*
+			A class designed to represent a 3D voxel field
+			*/
+
 			public:
-				IntVec3 dimensions;
+				glm::ivec3 size;
 				vector<Voxel> voxels;
 
-				//For testing the empty areas
+				//The default null (external) voxel
 				Voxel space;
 
-				VoxelField(IntVec3 dimensions);
-				Voxel* getVoxel(IntVec3 pos);
+				VoxelField(glm::ivec3 size);
+				Voxel* getVoxel(glm::ivec3 pos);
 		};
 	}
 }

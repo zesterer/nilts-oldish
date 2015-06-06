@@ -1,31 +1,30 @@
 #ifndef NILTS_WORLD_REGION_H
 #define NILTS_WORLD_REGION_H
 
+//----LIBRARY----
+#include "glm/glm.hpp"
+#include "glm/vec3.hpp"
+
 //----LOCAL----
 #include "visual/data/object.h"
 #include "common/types.h"
 #include "common/constants.h"
+#include "data/meshedvoxelfield.h"
 
 namespace Nilts
 {
 	namespace World
 	{
-		struct Voxel
+		class Region
 		{
 			public:
-				uint16 type;
-		};
-
-		struct Region
-		{
-			public:
-				IntPos pos;
-				Voxel voxels[NILTS_REGION_SIZE][NILTS_REGION_SIZE][NILTS_REGION_SIZE];
-
+				glm::ivec3 pos;
 				bool generated = false;
 
-				Visual::Data::Object* object = nullptr;
+				Data::MeshedVoxelField* field;
+				Visual::Data::Object* object;
 
+				Region();
 				void generate();
 		};
 	}

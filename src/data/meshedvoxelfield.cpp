@@ -20,43 +20,22 @@ namespace Nilts
 {
 	namespace Data
 	{
-		MeshedVoxelField::MeshedVoxelField(IntVec3 dimensions) : VoxelField(dimensions)
+		MeshedVoxelField::MeshedVoxelField(glm::ivec3 size) : VoxelField(size)
 		{
 			this->mesh = new Visual::Data::BufferedMesh();
 		}
 
 		void MeshedVoxelField::extract() //Extract a mesh from the voxel field
 		{
-			IO::output("Extracting mesh from voxel field of size " + to_string(this->dimensions.sum()));
-
-			World::Generation::PerlinNoise noise;
+			IO::output("Extracting mesh from voxel field of size " + to_string(this->size.x * this->size.y * this->size.z));
 
 			//Loop through each voxel
-			IntVec3 count = {0, 0, 0};
-			for (count.x = 0; count.x < this->dimensions.x; count.x ++)
+			glm::ivec3 count = {0, 0, 0};
+			for (count.x = 0; count.x < this->size.x; count.x ++)
 			{
-				for (count.y = 0; count.y < this->dimensions.y; count.y ++)
+				for (count.y = 0; count.y < this->size.y; count.y ++)
 				{
-					for (count.z = 0; count.z < this->dimensions.z; count.z ++)
-					{
-						Voxel* voxel = this->getVoxel(count);
-						glm::vec3 pos = glm::vec3((float32)count.x, (float32)count.y, (float32)count.z);
-
-						glm::vec3 offset = glm::normalize(noise.getPerlinVector(glm::vec4(pos.x / 500.0, pos.y / 500.0, pos.z / 500.0, 7.0), 2.0, 3.0, 1.5));
-
-						if ((noise.getPerlin(glm::vec4((pos.x + 32.0 * offset.x) / 1000.0, (pos.y + 32.0 * offset.y) / 1000.0, 0.0 * offset.z, 2.0), 1.0, 3.0, 1.0) + 1.1) * 32.0 > pos.z)
-							voxel->data = 1;
-					}
-				}
-			}
-
-			//Loop through each voxel
-			count = {0, 0, 0};
-			for (count.x = 0; count.x < this->dimensions.x; count.x ++)
-			{
-				for (count.y = 0; count.y < this->dimensions.y; count.y ++)
-				{
-					for (count.z = 0; count.z < this->dimensions.z; count.z ++)
+					for (count.z = 0; count.z < this->size.z; count.z ++)
 					{
 						Voxel* voxel = this->getVoxel(count);
 

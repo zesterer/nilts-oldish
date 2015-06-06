@@ -24,6 +24,7 @@
 #include "common/types.h"
 #include "camera.h"
 #include "data/meshedvoxelfield.h"
+#include "world/region.h"
 
 using namespace std;
 using namespace gl;
@@ -57,28 +58,23 @@ namespace Nilts
 			this->shader->enable();
 
 			Data::Light sun;
-			sun.type = Data::LightType::DIRECTIONAL;
+			sun.type = Data::LightType::POINT;
 			sun.colour = {0.2, 0.2, 0.2};
-			sun.position = {1.0, 1.0, -1.0};
+			sun.position = {0.0, 0.0, 256.0};
 			sun.ambiance = 0.0;
 			this->lights.push_back(sun);
 
 			Data::Light othersun;
-			othersun.type = Data::LightType::DIRECTIONAL;
+			othersun.type = Data::LightType::POINT;
 			othersun.colour = {0.5, 0.5, 0.4};
-			othersun.position = {-1.0, -1.0, -1.0};
+			othersun.position = {256.0, 256.0, 256.0};
 			othersun.ambiance = 0.15;
 			this->lights.push_back(othersun);
 
-			static Data::Object* object = new Data::Object();
-			object->update();
-			this->registerObject(object);
-
-			static Nilts::Data::MeshedVoxelField* field = new Nilts::Data::MeshedVoxelField({256, 256, 128});
-			field->extract();
-			object->material->shininess = 5.0;
-			object->mesh = field->mesh;
-
+			static World::Region* region = new World::Region();
+			region->generate();
+			region->field->extract();
+			this->registerObject(region->object);
 		}
 
 		void Scene::render()

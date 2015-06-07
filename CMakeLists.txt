@@ -20,7 +20,7 @@ add_definitions(-std=c++11 -Wall)
 
 #Libraries that can be imported with pkg-config
 pkg_search_module(GLFW REQUIRED glfw3)
-include_directories(glfw/include)
+include_directories("${PROJECT_SOURCE_DIR}/glfw/include")
 
 #Define a configuration file used by cmake
 configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main.h")

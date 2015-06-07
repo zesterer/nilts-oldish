@@ -16,11 +16,11 @@ set (NILTS_DEBUG_ENABLED true)
 project(nilts)
 
 #Tell the compiler to include -std=c++11
-add_definitions(-std=c++11 -Wall -L/opt/local/lib)
+add_definitions(-std=c++11 -Wall)
 
 #Libraries that can be imported with pkg-config
 pkg_search_module(GLFW REQUIRED glfw3)
-include_directories(glfw)
+include_directories(glfw/include)
 
 #Define a configuration file used by cmake
 configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main.h")

@@ -68,7 +68,7 @@ namespace Nilts
 			othersun.type = Data::LightType::POINT;
 			othersun.colour = {0.5, 0.5, 0.4};
 			othersun.position = {256.0, 256.0, 256.0};
-			othersun.ambiance = 0.15;
+			othersun.ambiance = 0.35;
 			this->lights.push_back(othersun);
 
 			static World::Region* region = new World::Region();

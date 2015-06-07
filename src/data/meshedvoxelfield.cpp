@@ -12,6 +12,7 @@
 #include "visual/data/geometry.h"
 #include "common/io.h"
 #include "marchingcubestable.h"
+#include "world/generation/perlin.h"
 
 using namespace std;
 
@@ -116,62 +117,104 @@ namespace Nilts
 		{
             //Loop through each voxel
 			glm::ivec3 count = {0, 0, 0};
-			for (count.x = 0; count.x < this->size.x; count.x ++)
+			for (count.x = -1; count.x < this->size.x; count.x ++)
 			{
-				for (count.y = 0; count.y < this->size.y; count.y ++)
+				for (count.y = -1; count.y < this->size.y; count.y ++)
 				{
-					for (count.z = 0; count.z < this->size.z; count.z ++)
+					for (count.z = -1; count.z < this->size.z; count.z ++)
 					{
 						glm::vec3 pos = glm::vec3((float32)count.x, (float32)count.y, (float32)count.z);
 
 						//Find the configuration index based on surrounding voxels
 						uint8 index = 0;
-						if (this->getVoxel(count + glm::ivec3(0, 0, 0))->density > 0) index |= 0b00000001;
-						if (this->getVoxel(count + glm::ivec3(1, 0, 0))->density > 0) index |= 0b00000010;
-						if (this->getVoxel(count + glm::ivec3(1, 1, 0))->density > 0) index |= 0b00000100;
-						if (this->getVoxel(count + glm::ivec3(0, 1, 0))->density > 0) index |= 0b00001000;
-						if (this->getVoxel(count + glm::ivec3(0, 0, 1))->density > 0) index |= 0b00010000;
-						if (this->getVoxel(count + glm::ivec3(1, 0, 1))->density > 0) index |= 0b00100000;
-						if (this->getVoxel(count + glm::ivec3(1, 1, 1))->density > 0) index |= 0b01000000;
-						if (this->getVoxel(count + glm::ivec3(0, 1, 1))->density > 0) index |= 0b10000000;
+						if (this->getVoxel(count + glm::ivec3(0, 0, 0))->density > 0.0) index |= 0b00000001;
+						if (this->getVoxel(count + glm::ivec3(1, 0, 0))->density > 0.0) index |= 0b00000010;
+						if (this->getVoxel(count + glm::ivec3(1, 1, 0))->density > 0.0) index |= 0b00000100;
+						if (this->getVoxel(count + glm::ivec3(0, 1, 0))->density > 0.0) index |= 0b00001000;
+						if (this->getVoxel(count + glm::ivec3(0, 0, 1))->density > 0.0) index |= 0b00010000;
+						if (this->getVoxel(count + glm::ivec3(1, 0, 1))->density > 0.0) index |= 0b00100000;
+						if (this->getVoxel(count + glm::ivec3(1, 1, 1))->density > 0.0) index |= 0b01000000;
+						if (this->getVoxel(count + glm::ivec3(0, 1, 1))->density > 0.0) index |= 0b10000000;
 
-						uint8 density_cube[8];
-						density_cube[0] = this->getVoxel(count + glm::ivec3(0, 0, 0))->density;
-						density_cube[1] = this->getVoxel(count + glm::ivec3(0, 0, 1))->density;
-						density_cube[2] = this->getVoxel(count + glm::ivec3(0, 1, 0))->density;
-						density_cube[3] = this->getVoxel(count + glm::ivec3(0, 1, 1))->density;
-						density_cube[4] = this->getVoxel(count + glm::ivec3(1, 0, 0))->density;
-						density_cube[5] = this->getVoxel(count + glm::ivec3(1, 0, 1))->density;
-						density_cube[6] = this->getVoxel(count + glm::ivec3(1, 1, 0))->density;
-						density_cube[7] = this->getVoxel(count + glm::ivec3(1, 1, 1))->density;
+						float32 density_cube[2][2][2];
+						density_cube[0][0][0] = this->getVoxel(count + glm::ivec3(0, 0, 0))->density;
+						density_cube[1][0][0] = this->getVoxel(count + glm::ivec3(0, 0, 1))->density;
+						density_cube[1][1][0] = this->getVoxel(count + glm::ivec3(0, 1, 0))->density;
+						density_cube[0][1][0] = this->getVoxel(count + glm::ivec3(0, 1, 1))->density;
+						density_cube[0][0][1] = this->getVoxel(count + glm::ivec3(1, 0, 0))->density;
+						density_cube[1][0][1] = this->getVoxel(count + glm::ivec3(1, 0, 1))->density;
+						density_cube[1][1][1] = this->getVoxel(count + glm::ivec3(1, 1, 0))->density;
+						density_cube[0][1][1] = this->getVoxel(count + glm::ivec3(1, 1, 1))->density;
 
-						//Get the configuration
-						vector<Visual::Data::Polygon> polygons = this->getMarchingCubesPolygonConfiguration(index, &density_cube[0], use_density);
-
-						//Move all those polygons to their correct position in the mesh
-						for (uint8 poly = 0; poly < polygons.size(); poly ++)
+						if (index != 0 && index != ~0) //Make sure it's not fully empty or fully filled
 						{
-							polygons[poly].a.pos += pos;
-							polygons[poly].b.pos += pos;
-							polygons[poly].c.pos += pos;
-						}
+							//Get the configuration
+							vector<Visual::Data::Polygon> polygons = this->getMarchingCubesPolygonConfiguration(index, density_cube, use_density);
 
-						//Append them all to the current mesh
-						this->mesh->polygons.insert(this->mesh->polygons.end(), polygons.begin(), polygons.end());
+							World::Generation::PerlinNoise noise;
+							//Move all those polygons to their correct position in the mesh
+							for (uint8 poly = 0; poly < polygons.size(); poly ++)
+							{
+								polygons[poly].a.pos += pos;
+								polygons[poly].b.pos += pos;
+								polygons[poly].c.pos += pos;
+
+								if (use_density && false)
+								{
+									auto v1 = noise.getPerlinVec3(glm::vec4(polygons[poly].a.pos, 17.0f), -3.0f, 1.0f, 1.0f);
+									auto v2 = noise.getPerlinVec3(glm::vec4(polygons[poly].b.pos, 17.0f), -3.0f, 1.0f, 1.0f);
+									auto v3 = noise.getPerlinVec3(glm::vec4(polygons[poly].c.pos, 17.0f), -3.0f, 1.0f, 1.0f);
+
+									polygons[poly].a.pos += glm::mix(v1, glm::vec3(0.0, 0.0, 0.0), 0.1);
+									polygons[poly].b.pos += glm::mix(v2, glm::vec3(0.0, 0.0, 0.0), 0.1);
+									polygons[poly].c.pos += glm::mix(v3, glm::vec3(0.0, 0.0, 0.0), 0.1);
+								}
+							}
+
+							//Append them all to the current mesh
+							this->mesh->polygons.insert(this->mesh->polygons.end(), polygons.begin(), polygons.end());
+						}
 					}
 				}
 			}
 		}
 
-		float32 MeshedVoxelField::getOffset(uint8 d1, uint8 d2)
+		glm::vec3 MeshedVoxelField::getInterp(int edge, float32 density[2][2][2])
 		{
-			float32 v1 = ((float32)d1) / 256.0;
-			float32 v2 = ((float32)d2) / 256.0;
-			float32 delta = v2 - v1;
-			return 0.5 + delta * 0.5;
+			glm::vec3 p1 = MC_EDGES[edge][0];
+			glm::vec3 p2 = MC_EDGES[edge][1];
+
+			float32 d1 = density[MC_INTEDGES[edge][0].x][MC_INTEDGES[edge][0].y][MC_INTEDGES[edge][0].z];
+			float32 d2 = density[MC_INTEDGES[edge][1].x][MC_INTEDGES[edge][1].y][MC_INTEDGES[edge][1].z];
+
+			float32 isolevel = 0.5;
+			float32 mu;
+			glm::vec3 p;
+
+			/*if (abs(isolevel - d1) < 0.00001)
+				return p1;
+			if (abs(isolevel - d2) < 0.00001)
+				return p2;
+			if (glm::abs(d1 - d2) < 0.00001)
+				return p1;*/
+
+			if (abs(d2 - d1) < 0.0001)
+				p = glm::mix(p1, p2, 0.5);
+			else
+			{
+				mu = (isolevel - d1) / (d2 + d1);
+				//mu = 0.5;
+				p.x = p1.x + mu * (p2.x - p1.x);
+				p.y = p1.y + mu * (p2.y - p1.y);
+				p.z = p1.z + mu * (p2.z - p1.z);
+			}
+
+			//IO::output("x=" + to_string(p1.x) + " y=" + to_string(p2.x) + " z=" + to_string(p.x) + " mu=" + to_string(mu));
+
+			return p;
 		}
 
-		vector<Visual::Data::Polygon> MeshedVoxelField::getMarchingCubesPolygonConfiguration(uint8 index, uint8* density, bool use_density)
+		vector<Visual::Data::Polygon> MeshedVoxelField::getMarchingCubesPolygonConfiguration(uint8 index, float32 density[2][2][2], bool use_density)
 		{
 			vector<Visual::Data::Polygon> polygons;
 			int triangles[16];
@@ -191,9 +234,15 @@ namespace Nilts
 
 					if (use_density)
 					{
-						poly.c.pos = glm::mix(MC_EDGES[triangles[c + 0]][0], MC_EDGES[triangles[c + 0]][1], this->getOffset(density[MC_EDGE2VERTEX[triangles[c + 0]][0]], density[MC_EDGE2VERTEX[triangles[c + 0]][1]]));
-						poly.b.pos = glm::mix(MC_EDGES[triangles[c + 1]][0], MC_EDGES[triangles[c + 1]][1], this->getOffset(density[MC_EDGE2VERTEX[triangles[c + 1]][0]], density[MC_EDGE2VERTEX[triangles[c + 1]][1]]));
-						poly.a.pos = glm::mix(MC_EDGES[triangles[c + 2]][0], MC_EDGES[triangles[c + 2]][1], this->getOffset(density[MC_EDGE2VERTEX[triangles[c + 2]][0]], density[MC_EDGE2VERTEX[triangles[c + 2]][1]]));
+						poly.c.pos = this->getInterp(triangles[c + 0], density);
+						poly.b.pos = this->getInterp(triangles[c + 1], density);
+						poly.a.pos = this->getInterp(triangles[c + 2], density);
+						//poly.b.pos = this->getInterp(MC_EDGES[triangles[c + 1]][0], MC_EDGES[triangles[c + 1]][1], density[MC_EDGE2VERTEX[triangles[c + 1]][0]], density[MC_EDGE2VERTEX[triangles[c + 1]][1]]);
+						//	poly.a.pos = this->getInterp(MC_EDGES[triangles[c + 2]][0], MC_EDGES[triangles[c + 2]][1], density[MC_EDGE2VERTEX[triangles[c + 2]][0]], density[MC_EDGE2VERTEX[triangles[c + 2]][1]]);
+
+						//poly.c.pos = glm::mix(MC_EDGES[triangles[c + 0]][0], MC_EDGES[triangles[c + 0]][1], this->getOffset(density[MC_EDGE2VERTEX[triangles[c + 0]][0]], density[MC_EDGE2VERTEX[triangles[c + 0]][1]]));
+						//poly.b.pos = glm::mix(MC_EDGES[triangles[c + 1]][0], MC_EDGES[triangles[c + 1]][1], this->getOffset(density[MC_EDGE2VERTEX[triangles[c + 1]][0]], density[MC_EDGE2VERTEX[triangles[c + 1]][1]]));
+						//poly.a.pos = glm::mix(MC_EDGES[triangles[c + 2]][0], MC_EDGES[triangles[c + 2]][1], this->getOffset(density[MC_EDGE2VERTEX[triangles[c + 2]][0]], density[MC_EDGE2VERTEX[triangles[c + 2]][1]]));
 					}
 					else
 					{

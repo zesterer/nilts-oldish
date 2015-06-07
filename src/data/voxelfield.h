@@ -21,7 +21,7 @@ namespace Nilts
 		{
 			public:
 				uint16 data = 0;
-				uint8 density = 0;
+				float32 density = 0;
 		};
 
 		class VoxelField

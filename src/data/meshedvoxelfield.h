@@ -38,8 +38,8 @@ namespace Nilts
 			private:
 				void extractCubic();
 				void extractMarchingCubes(bool use_density = false);
-				float32 getOffset(uint8 d1, uint8 d2);
-				vector<Visual::Data::Polygon> getMarchingCubesPolygonConfiguration(uint8 index, uint8* density, bool use_density);
+				glm::vec3 getInterp(int edge, float32 density[2][2][2]);
+				vector<Visual::Data::Polygon> getMarchingCubesPolygonConfiguration(uint8 index, float32 density[2][2][2], bool use_density);
 				void addQuad(glm::vec3 a, glm::vec3 b, glm::vec3 c, glm::vec3 d);
 		};
 	}

@@ -15,6 +15,8 @@
 #include "generation/perlin.h"
 #include "data/meshedvoxelfield.h"
 
+using namespace std;
+
 namespace Nilts
 {
 	namespace World
@@ -50,23 +52,25 @@ namespace Nilts
 						glm::vec3 pos = glm::vec3((float32)(count.x + this->pos.x), (float32)(count.y + this->pos.y), (float32)(count.z + this->pos.z));
 
 						///*
-						glm::vec3 offset = noise.getPerlinVec3(glm::vec4(pos.x, pos.y, pos.z, 7.0), -7.5, 1.0, 1.0);
+						glm::vec2 offset = noise.getPerlinVec2(glm::vec4(pos.x, pos.y, pos.z, 7.0), -7.5, 1.0, 1.0);
 
 						if ((noise.getPerlin(glm::vec4((pos.x + 96.0 * offset.x), (pos.y + 96.0 * offset.y), 0.0, 2.0), -8.5, 2.0, 1.0) + 3.0) * 48.0 > pos.z)
 							voxel->data = 1;
 
-						if (voxel->data == 1 && false)
+						if (voxel->data == 1 && true)
 						{
-							glm::vec2 cave = noise.getPerlinVec2(glm::vec4(pos.x, pos.y, pos.z * 2.0, 4.0), -6.5, 1.0, 1.0);
+							float32 p1 = noise.getPerlin(glm::vec4(pos.x, pos.y, pos.z, 56.0), -9.0, 2.0, 1.5);
+							float32 p2 = noise.getPerlin(glm::vec4(pos.x, pos.y, pos.z, 156.0), -9.0, 2.0, 1.5);
 
-							if (glm::abs(cave.x) < 0.1 && glm::abs(cave.y) < 0.08)
+							if ((1.0 - glm::abs(p1)) * (1.0 - glm::abs(p2)) > 0.93)
 								voxel->data = 0;
 						}
 
 						voxel->density = voxel->data;
 						//*/
 						/*
-						voxel->density = (uint8)(max(noise.getPerlin(glm::vec4(pos.x, pos.y, pos.z, 2.0), -7.5, 2.0, 1.0), 0.0f) * 255.0);
+						voxel->density = max(noise.getPerlin(glm::vec4(pos.x, pos.y, pos.z, 2.0), -7.5, 2.0, 1.0), 0.0f);
+						//IO::output(to_string(voxel->density));
 
 						if (voxel->density != 0)
 							voxel->data = 1;

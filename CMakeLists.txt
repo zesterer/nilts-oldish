@@ -62,5 +62,5 @@ src/visual/data/geometry.cpp
 add_executable(nilts ${SOURCE_FILES})
 
 #Link the final executable to the needed libraries
-target_link_libraries(nilts glfw ${GLFW_LIBRARIES})
-target_link_libraries(nilts glbinding ${GLBINDING_LIBRARIES})
+target_link_libraries(nilts glfw ${GLFW_LIBRARY_DIR})
+target_link_libraries(nilts glbinding ${GLBINDING_LIBRARY_DIR})

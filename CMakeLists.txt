@@ -16,11 +16,11 @@ set (NILTS_DEBUG_ENABLED true)
 project(nilts)
 
 #Tell the compiler to include -std=c++11
-add_definitions(-std=c++11 -Wall)
+add_definitions(-std=c++11 -Wall -L/opt/local/lib)
 
 #Libraries that can be imported with pkg-config
 pkg_search_module(GLFW REQUIRED glfw3)
-include_directories(${GLFW_INCLUDE_DIRS})
+include_directories(glfw)
 
 #Define a configuration file used by cmake
 configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main.h")
@@ -62,5 +62,5 @@ src/visual/data/geometry.cpp
 add_executable(nilts ${SOURCE_FILES})
 
 #Link the final executable to the needed libraries
-target_link_libraries(nilts glfw ${GLFW_LIBRARY_DIR})
+target_link_libraries(nilts glfw ${GLFW3_LIBRARY_DIR})
 target_link_libraries(nilts glbinding ${GLBINDING_LIBRARY_DIR})

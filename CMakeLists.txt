@@ -24,7 +24,6 @@ include_directories("${PROJECT_SOURCE_DIR}/glfw/include/")
 include_directories("${PROJECT_SOURCE_DIR}/glfw/include/GLFW")
 include_directories("glfw/include/")
 include_directories(${GLFW_INCLUDE_DIRS})
-add_subdirectory("${PROJECT_SOURCE_DIR}/glfw/src/")
 add_subdirectory("glfw/")
 
 #Define a configuration file used by cmake

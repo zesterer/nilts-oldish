@@ -23,8 +23,24 @@ Nilts is designed to be this way for several reasons:
 
 - Procedurally generated content is far more varied than anything a human could ever concieve.
 - Generating content on the fly means a more lightweight game with more space for visual effects and procedural content.
-- I'm a terrible artist and can't afford a good one.
 - Procedural content means I spend less time building assets and more time actually writing software that builds the content.
+- I'm a terrible artist and can't afford a good one.
+
+### What dependencies does Nilts have?
+
+Nilts depends on several libraries and programs. They are:
+
+##### Non-essential
+
+- git *[For cloning this repository]*
+- cmake *[For compiling Nilts]*
+
+##### Essential
+
+- glfw3 *[For creating the window and GL contexts]*
+- glbinding *[For the OpenGL API Nilts uses]*
+- glm *[For mathematical operations]*
+- libc *[C and C++ standard library]*
 
 ### What platforms does Nilts run on?
 
@@ -47,6 +63,8 @@ This will clone a copy of the Nilts repository into the current directory.
 ##### Compiling
 
 *Assuming you've just downloaded Nilts via the methods shown above*
+
+*Assuming you're running a Linux system with 'cmake' pre-installed, along with other dependencies mentioned above*
 
 Navigate to the Nilts root directory as follows.
 
@@ -78,11 +96,11 @@ Run the Nilts executable as follows.
 
 ### Why 'Nilts'?
 
-Nilts is an acroynm for 'New and Improved Leon Trotsky Simulator'. Don't ask me why.
+Nilts is an acroynm for 'New and Improved Leon Trotsky Simulator'. Don't ask me why. I think it originated as a joke between friends.
 
 ### How is Nilts licensed?
 
-Nilts and all code within the "src" directory of this repository is licensed under GPL 2 unless explicitly explained otherwise.
+Nilts and all code within the "src" directory of this repository is licensed under GPL 2 unless explicitly explained otherwise. Any libraries included with this repositories are licensed seperately as their creator intended.
 
 ### I've found a bug. What do I do?
 
@@ -113,4 +131,4 @@ No you don't. There are people dying all over the world because they can't get a
 There are many people who have aided me in development on Nilts, and no doubt this list will grow as I develop further. Here are just a few:
 
 - A certain Quint Thrithe
-- The many people I've asked questions to on IRC (##c++, ##opengl, ##c, etc.)
+- The many people I've asked questions to on IRC (FreeNode: ##c++, ##opengl, ##c, etc.)

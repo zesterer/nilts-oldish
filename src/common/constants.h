@@ -6,7 +6,7 @@
 #include "glm/vec3.hpp"
 
 //World data
-#define NILTS_REGION_SIZE 256
+#define NILTS_REGION_SIZE 128
 
 //Cube vectors. For face placement and stuff
 #define CubeVec000 glm::vec3(0.0, 0.0, 0.0)

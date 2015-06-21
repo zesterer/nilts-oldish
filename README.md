@@ -9,6 +9,8 @@
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━┛
 ```
 
+![alt tag](http://i.imgur.com/jFIhCtU.png)
+
 ### What is Nilts?
 
 Nilts is a 3D game set within a mythical world. Designed from the start with multi-player in mind, Nilts is a game designed to be as involving and complex as is possible for a game.

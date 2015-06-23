@@ -88,7 +88,7 @@ namespace Nilts
 
 			// Render to our framebuffer
 			glBindFramebuffer(GL_FRAMEBUFFER, this->render_framebuffer->gl_id);
-			glViewport(0, 0, 1024, 768);
+			glViewport(0, 0, 640 * 1.4, 480 * 1.4);
 
 			//Blank the screen
 			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -173,7 +173,7 @@ namespace Nilts
 
 			//Bind the framebuffer ready
 			glBindFramebuffer(GL_FRAMEBUFFER, 0);
-			glViewport(0, 0, 1024, 768); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+			glViewport(0, 0, 640 * 1.4, 480 * 1.4); // Render on the whole framebuffer, complete from the lower left corner to the upper right
 
 			glBindBuffer(GL_ARRAY_BUFFER, framebuffer->gl_quad_buffer_id);
 
@@ -181,7 +181,8 @@ namespace Nilts
 			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (void*)(unsigned long)0);
 
-			GLuint texID = glGetUniformLocation(framebuffer->shader->gl_id, "RENDER_TEXTURE");
+			GLuint tex_id = glGetUniformLocation(framebuffer->shader->gl_id, "RENDER_TEXTURE");
+			glUniform1i(tex_id, 0);
 			glBindTexture(GL_TEXTURE_2D, framebuffer->gl_tex_id);
 
 			framebuffer->shader->enable();

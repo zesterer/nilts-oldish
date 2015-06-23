@@ -33,6 +33,7 @@ namespace Nilts
 					Shader* shader;
 
 					FrameBuffer();
+					void setDrawBuffers();
 			};
 		}
 	}

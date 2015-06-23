@@ -17,8 +17,8 @@ namespace Nilts
 	{
 		Camera::Camera()
 		{
-			this->position = glm::vec3(64.0, 64.0, 64.0);
-			this->rotation = glm::vec3(0.0, 0.3, 0.0);
+			this->position = glm::vec3(64.0, 64.0, 130.0);
+			this->rotation = glm::vec3(0.0, 0.6, 0.0);
 		}
 
 		void Camera::update()
@@ -66,6 +66,10 @@ namespace Nilts
 				this->position.z += 0.15;
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_N) == GLFW_PRESS)
 				this->position.z -= 0.15;
+			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_P) == GLFW_PRESS)
+				this->position.z += 15.0;
+			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_O) == GLFW_PRESS)
+				this->position.z -= 15.0;
 
 			if (glfwGetKey(this->window->glfw_window, GLFW_KEY_RIGHT) == GLFW_PRESS)
 				this->rotation.x += 0.03;

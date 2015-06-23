@@ -24,6 +24,7 @@ smooth in lowp    vec4      FRAG_NORM;
 
 //----OUTPUTS----
 out       lowp    vec3      COLOR;
+out       lowp    vec3      FRAMEBUFFER_COLOR;
 
 //----GLOBALS----
           lowp    vec4      MOD_NORM;
@@ -42,7 +43,7 @@ float getSpecular(vec4 vector)
 	lowp vec3 V = normalize(FRAG_POS.xyz / 2.0);
 
 	lowp float specular = (dot(R, V) - (1.0 - specular_amount)) * 1.0 / specular_amount;
-	specular = min(specular_cap, pow(max(0.0, specular), specular_shininess) * specular_shininess * 0.2);
+	specular = min(specular_cap, pow(max(0.0, specular), max(0.00001, specular_shininess)) * specular_shininess * 0.2);
 	return specular;
 }
 
@@ -53,7 +54,7 @@ float getDiffuse(vec4 vector, float ambiance)
 
 vec3 getTexture()
 {
-	return mix(vec3(1.0, 0.8, 0.5), vec3(0.0, 1.0, 0.0), dot((MODEL_MATRIX * MOD_NORM).xyz, vec3(0.0, 0.0, 1.0)));
+	return mix(vec3(0.7, 0.35, 0.05), vec3(0.0, 1.0, 0.0), dot((MODEL_MATRIX * MOD_NORM).xyz, vec3(0.0, 0.0, 1.0)));
 
 	//No proper texture has been loaded in, so revert to colours
 	if (textureSize(TEXTURE_SAMPLER, 0) == ivec2(1, 1))
@@ -68,9 +69,9 @@ vec3 getTexture()
 vec4 getVector(vec4 vector)
 {
 	if (vector.w == 1.0) //It's a point light
-		return normalize(vec4((MODEL_MATRIX * FRAG_M_POS).xyz - (vector).xyz, 0.0));
+		return normalize(vec4((MODEL_MATRIX * FRAG_M_POS).xyz - vector.xyz, 0.0));
 	else //It's a directional light
-		return vector;
+		return normalize(vector);
 }
 
 bool getEffect(int x)
@@ -88,27 +89,27 @@ float getRandom(vec4 pos)
 
 float getNoise(vec4 pos, float octave)
 {
-	pos *= pow(2.0, octave);
-	vec3 mpos = mod(pos.xyz, 1.0);
-	pos = floor(pos);
+	pos       *= pow(2.0, octave);
+	vec3 mpos  = mod(pos.xyz, 1.0);
+	pos        = floor(pos);
 
-	float c000 = getRandom(pos + vec4(0.0, 0.0, 0.0, 0.0));
-	float c100 = getRandom(pos + vec4(1.0, 0.0, 0.0, 0.0));
-	float c010 = getRandom(pos + vec4(0.0, 1.0, 0.0, 0.0));
-	float c110 = getRandom(pos + vec4(1.0, 1.0, 0.0, 0.0));
+	float c000  = getRandom(pos + vec4(0.0, 0.0, 0.0, 0.0));
+	float c100  = getRandom(pos + vec4(1.0, 0.0, 0.0, 0.0));
+	float c010  = getRandom(pos + vec4(0.0, 1.0, 0.0, 0.0));
+	float c110  = getRandom(pos + vec4(1.0, 1.0, 0.0, 0.0));
 
-	float c001 = getRandom(pos + vec4(0.0, 0.0, 1.0, 0.0));
-	float c101 = getRandom(pos + vec4(1.0, 0.0, 1.0, 0.0));
-	float c011 = getRandom(pos + vec4(0.0, 1.0, 1.0, 0.0));
-	float c111 = getRandom(pos + vec4(1.0, 1.0, 1.0, 0.0));
+	float c001  = getRandom(pos + vec4(0.0, 0.0, 1.0, 0.0));
+	float c101  = getRandom(pos + vec4(1.0, 0.0, 1.0, 0.0));
+	float c011  = getRandom(pos + vec4(0.0, 1.0, 1.0, 0.0));
+	float c111  = getRandom(pos + vec4(1.0, 1.0, 1.0, 0.0));
 
-	float eX00 = mix(c000, c100, mpos.x);
-	float eX10 = mix(c010, c110, mpos.x);
-	float eX01 = mix(c001, c101, mpos.x);
-	float eX11 = mix(c011, c111, mpos.x);
+	float eX00  = mix(c000, c100, mpos.x);
+	float eX10  = mix(c010, c110, mpos.x);
+	float eX01  = mix(c001, c101, mpos.x);
+	float eX11  = mix(c011, c111, mpos.x);
 
-	float fXX0 = mix(eX00, eX10, mpos.y);
-	float fXX1 = mix(eX01, eX11, mpos.y);
+	float fXX0  = mix(eX00, eX10, mpos.y);
+	float fXX1  = mix(eX01, eX11, mpos.y);
 
 	float value = mix(fXX0, fXX1, mpos.z);
 
@@ -129,7 +130,7 @@ void main()
 {
 	//Initialise the specular and diffuse
 	lowp vec3 specular = vec3(0.0, 0.0, 0.0);
-	lowp vec3 diffuse = vec3(0.0, 0.0, 0.0);
+	lowp vec3 diffuse  = vec3(0.0, 0.0, 0.0);
 
 	//Initialise the normal
 	MOD_NORM = FRAG_NORM;
@@ -138,15 +139,15 @@ void main()
 	if (getEffect(1) && false)
 	{
 		vec4 norm = vec4(0.0, 0.0, 0.0, 0.0);
-		vec3 pos = vec3(MODEL_MATRIX * FRAG_M_POS).xyz;
+		vec3 pos  = vec3(MODEL_MATRIX * FRAG_M_POS).xyz;
 
 		float lod = min(6.0, max(1.0, -1.0 / FRAG_POS.z * 100.0));
 
-		norm.x = getPerlin(vec4(pos, 1.0), 1.5, lod, 1.0);
-		norm.y = getPerlin(vec4(pos, 2.0), 1.5, lod, 1.0);
-		norm.z = getPerlin(vec4(pos, 3.0), 1.5, lod, 1.0);
-		norm = normalize(norm);
-		MOD_NORM = normalize(MOD_NORM + norm * 0.35);
+		norm.x    = getPerlin(vec4(pos, 1.0), 0.5, lod, 1.0);
+		norm.y    = getPerlin(vec4(pos, 2.0), 0.5, lod, 1.0);
+		norm.z    = getPerlin(vec4(pos, 3.0), 0.5, lod, 1.0);
+		norm      = normalize(norm);
+		MOD_NORM  = normalize(MOD_NORM + norm * 0.55);
 	}
 
 	//Loop through all the lights
@@ -158,9 +159,19 @@ void main()
 
 		if (colour.xyz != vec3(0.0, 0.0, 0.0)) //If the light is actually a light
 		{
+			float multiplier = 1.0;
+
+			if (vector.w == 1.0) //Decrease brightness with distance
+			{
+				multiplier = min(1.0, 5.0 / pow(distance((MODEL_MATRIX * FRAG_M_POS).xyz, LIGHT_VECTOR[count].xyz), 1.5));
+
+				//Spotlight - WIP
+				//multiplier *= pow(1.05 * dot(normalize(vec3(1.0, 0.9, -2.5)), vector.xyz), 5.0);
+			}
+
 			//Add the light to the existing lighting conditions
-			specular += colour.xyz * getSpecular(vector); //Find the specular component
-			diffuse  += colour.xyz * getDiffuse(vector, colour.w); //Find the diffuse component
+			specular += colour.xyz * getSpecular(vector) * multiplier; //Find the specular component
+			diffuse  += colour.xyz * getDiffuse(vector, colour.w) * multiplier; //Find the diffuse component
 		}
 	}
 
@@ -172,9 +183,11 @@ void main()
 	//Cel-shading
 	if (getEffect(0))
 	{
-		diffuse = floor(diffuse * 4.0) / 4.0;
+		diffuse  = floor(diffuse * 4.0) / 4.0;
 		specular = floor(specular * 2.0) / 2.0;
 	}
 
 	COLOR = getTexture() * diffuse + specular;
+
+	FRAMEBUFFER_COLOR = COLOR;
 }

@@ -16,6 +16,7 @@
 #include "data/shader.h"
 #include "data/light.h"
 #include "data/material.h"
+#include "data/framebuffer.h"
 
 using namespace gl;
 
@@ -26,6 +27,8 @@ namespace Nilts
 		class Scene
 		{
 			public:
+				Data::FrameBuffer* render_framebuffer;
+
 				Camera* camera;
 
 				unordered_set<Data::Object*> objects;

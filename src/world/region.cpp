@@ -32,7 +32,7 @@ namespace Nilts
 			this->object->mesh = this->field->mesh;
 
 			//Set the material properties
-			this->object->material->shininess = 15.0;
+			this->object->material->shininess = 3.0;
 			this->object->material->specular_amount = 1.0;
 		}
 

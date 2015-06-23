@@ -25,6 +25,7 @@
 #include "camera.h"
 #include "data/meshedvoxelfield.h"
 #include "world/region.h"
+#include "data/framebuffer.h"
 
 using namespace std;
 using namespace gl;
@@ -52,21 +53,24 @@ namespace Nilts
 			glEnable(GL_DEPTH_TEST);
 			glDepthFunc(GL_LESS);
 
+			//Create the framebuffer
+			//this->render_framebuffer = new Data::FrameBuffer();
+
 			//Create the shader
 			this->shader = new Data::Shader();
 			this->shader->loadFromFiles("../shaders/std-vertex-shader.glsl", "../shaders/std-fragment-shader.glsl");
 			this->shader->enable();
 
 			Data::Light sun;
-			sun.type = Data::LightType::POINT;
-			sun.colour = {0.2, 0.2, 0.2};
-			sun.position = {0.0, 0.0, 256.0};
-			sun.ambiance = 0.0;
+			sun.type = Data::LightType::DIRECTIONAL;
+			sun.colour = {1.0, 1.0, 1.0};
+			sun.position = {64.0, 50.0, -130.0};
+			sun.ambiance = 0.3;
 			this->lights.push_back(sun);
 
 			Data::Light othersun;
 			othersun.type = Data::LightType::POINT;
-			othersun.colour = {0.5, 0.5, 0.4};
+			othersun.colour = {0.0005, 0.0005, 0.0005};
 			othersun.position = {256.0, 256.0, 256.0};
 			othersun.ambiance = 0.35;
 			this->lights.push_back(othersun);
@@ -81,6 +85,10 @@ namespace Nilts
 		{
 			//Update stuff
 			this->update();
+
+			// Render to our framebuffer
+			//glBindFramebuffer(GL_FRAMEBUFFER, this->render_framebuffer->gl_id);
+			//glViewport(0, 0, 1024, 768);
 
 			//Blank the screen
 			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -150,6 +158,8 @@ namespace Nilts
 				for (int count = 0; count < 4; count ++)
 					glDisableVertexAttribArray(count);
 			}
+
+			//glDrawBuffers(1, this->render_framebuffer->gl_draw_buffers);
 		}
 
 		void Scene::update()
@@ -175,8 +185,8 @@ namespace Nilts
 				light_colour_array[light] = glm::vec4(clight->colour, clight->ambiance);
 			}
 
-			glUniform4fv(glGetUniformLocation(this->shader->gl_id, "LIGHT_VECTOR"), 16 * 3, &light_vector_array[0].x);
-			glUniform4fv(glGetUniformLocation(this->shader->gl_id, "LIGHT_COLOUR"), 16 * 3, &light_colour_array[0].x);
+			glUniform4fv(glGetUniformLocation(this->shader->gl_id, "LIGHT_VECTOR"), 16 * 4, &light_vector_array[0].x);
+			glUniform4fv(glGetUniformLocation(this->shader->gl_id, "LIGHT_COLOUR"), 16 * 4, &light_colour_array[0].x);
 		}
 
 		void Scene::registerObject(Data::Object* object)

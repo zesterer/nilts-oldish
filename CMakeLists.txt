@@ -56,6 +56,7 @@ src/world/world.cpp
 src/data/voxelfield.cpp
 src/data/meshedvoxelfield.cpp
 src/visual/data/geometry.cpp
+src/visual/data/framebuffer.cpp
 )
 
 #Take the code and turn it into the executable

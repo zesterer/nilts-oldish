@@ -46,20 +46,13 @@ namespace Nilts
 			IO::output("Initialising GLBinding");
 			glbinding::Binding::initialize();
 
-			//Enable backface culling
-			glEnable(GL_CULL_FACE);
-
-			//Enable the depth buffer
-			glEnable(GL_DEPTH_TEST);
-			glDepthFunc(GL_LESS);
-
-			//Create the framebuffer
-			//this->render_framebuffer = new Data::FrameBuffer();
-
 			//Create the shader
 			this->shader = new Data::Shader();
 			this->shader->loadFromFiles("../shaders/std-vertex-shader.glsl", "../shaders/std-fragment-shader.glsl");
 			this->shader->enable();
+
+			//Create the framebuffer
+			this->render_framebuffer = new Data::FrameBuffer();
 
 			Data::Light sun;
 			sun.type = Data::LightType::DIRECTIONAL;
@@ -86,9 +79,16 @@ namespace Nilts
 			//Update stuff
 			this->update();
 
+			//Enable backface culling
+			glEnable(GL_CULL_FACE);
+
+			//Enable the depth buffer
+			glEnable(GL_DEPTH_TEST);
+			glDepthFunc(GL_LESS);
+
 			// Render to our framebuffer
-			//glBindFramebuffer(GL_FRAMEBUFFER, this->render_framebuffer->gl_id);
-			//glViewport(0, 0, 1024, 768);
+			glBindFramebuffer(GL_FRAMEBUFFER, this->render_framebuffer->gl_id);
+			glViewport(0, 0, 1024, 768);
 
 			//Blank the screen
 			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -159,7 +159,39 @@ namespace Nilts
 					glDisableVertexAttribArray(count);
 			}
 
-			//glDrawBuffers(1, this->render_framebuffer->gl_draw_buffers);
+			this->renderFrameBuffer(this->render_framebuffer);
+		}
+
+		void Scene::renderFrameBuffer(Data::FrameBuffer* framebuffer)
+		{
+			//Disable backface culling
+			glDisable(GL_CULL_FACE);
+
+			//Disable the depth buffer
+			glDisable(GL_DEPTH_TEST);
+			glDepthFunc(GL_NONE);
+
+			//Bind the framebuffer ready
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glViewport(0, 0, 1024, 768); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+
+			glBindBuffer(GL_ARRAY_BUFFER, framebuffer->gl_quad_buffer_id);
+
+			//Tell the shaders what different parts of the buffer mean using the above array
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, (void*)(unsigned long)0);
+
+			GLuint texID = glGetUniformLocation(framebuffer->shader->gl_id, "RENDER_TEXTURE");
+			glBindTexture(GL_TEXTURE_2D, framebuffer->gl_tex_id);
+
+			framebuffer->shader->enable();
+
+			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			glDrawArrays(GL_TRIANGLES, 0, sizeof(GLfloat) * 6 * 3);
+
+			glDisableVertexAttribArray(0);
 		}
 
 		void Scene::update()

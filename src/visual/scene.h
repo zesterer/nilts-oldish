@@ -40,6 +40,7 @@ namespace Nilts
 				Scene();
 				void enable();
 				void render();
+				void renderFrameBuffer(Data::FrameBuffer* framebuffer);
 				void update();
 
 				void assignLights();

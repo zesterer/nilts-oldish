@@ -108,6 +108,8 @@ namespace Nilts
 
 			void Shader::enable()
 			{
+				//IO::output("Enabled shader program");
+
 				glUseProgram(this->gl_id);
 			}
 		}

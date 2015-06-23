@@ -54,7 +54,7 @@ namespace Nilts
 						///*
 						glm::vec2 offset = noise.getPerlinVec2(glm::vec4(pos.x, pos.y, pos.z, 7.0), -7.5, 1.0, 1.0);
 
-						if ((noise.getPerlin(glm::vec4((pos.x + 96.0 * offset.x), (pos.y + 96.0 * offset.y), 0.0, 2.0), -8.5, 2.0, 1.0) + 3.0) * 48.0 > pos.z)
+						if ((noise.getPerlin(glm::vec4((pos.x + 96.0 * offset.x), (pos.y + 96.0 * offset.y), 0.0, 2.0), -8.5, 2.0, 1.0) + 3.0) * 24.0 > pos.z)
 							voxel->data = 1;
 
 						if (voxel->data == 1 && true)

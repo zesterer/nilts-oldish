@@ -24,7 +24,7 @@ smooth in lowp    vec4      FRAG_NORM;
 
 //----OUTPUTS----
 out       lowp    vec3      COLOR;
-out       lowp    vec3      FRAMEBUFFER_COLOR;
+//out       lowp    vec3      FRAMEBUFFER_COLOR;
 
 //----GLOBALS----
           lowp    vec4      MOD_NORM;
@@ -189,5 +189,5 @@ void main()
 
 	COLOR = getTexture() * diffuse + specular;
 
-	FRAMEBUFFER_COLOR = COLOR;
+	//FRAMEBUFFER_COLOR = COLOR;
 }

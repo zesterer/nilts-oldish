@@ -55,7 +55,7 @@ void main()
 {
 	vec2 sample_position = UV;
 
-	sample_position += 0.15 * vec2(getPerlin(vec4(UV / 2.0, 0.0, 0.0), 1.0, 3.0, 1.0), getPerlin(vec4(UV / 2.0, 0.0, 1.0), 1.0, 3.0, 1.0));
+	sample_position += 0.15 * vec2(getPerlin(vec4(UV / 6.0, 0.0, 0.0), 1.0, 3.0, 1.0), getPerlin(vec4(UV / 6.0, 0.0, 1.0), 1.0, 3.0, 1.0));
 
 	COLOUR = texture2DProjLod(RENDER_TEXTURE, vec3((vec2(1.0, 1.0) + sample_position) / 2.0, 1.0), 0.0).rgb;
 }

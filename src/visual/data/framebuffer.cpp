@@ -20,7 +20,7 @@ namespace Nilts
 				glGenTextures(1, &this->gl_tex_id);
 				//Bind the texture
 				glBindTexture(GL_TEXTURE_2D, this->gl_tex_id);
-				glTexImage2D(GL_TEXTURE_2D, 0, (GLint)GL_RGB8, 640 * 1.4, 480 * 1.4, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+				glTexImage2D(GL_TEXTURE_2D, 0, (GLint)GL_RGBA16F, 640 * 1.4, 480 * 1.4, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
 				//Add filtering
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (GLint)GL_NEAREST);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLint)GL_NEAREST);

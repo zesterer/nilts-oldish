@@ -52,7 +52,7 @@ namespace Nilts
 			this->shader->enable();
 
 			//Create the framebuffer
-			this->render_framebuffer = new Data::FrameBuffer();
+			this->default_framebuffer = new Data::FrameBuffer();
 
 			Data::Light sun;
 			sun.type = Data::LightType::DIRECTIONAL;
@@ -79,6 +79,14 @@ namespace Nilts
 			//Update stuff
 			this->update();
 
+			//First render the scene to a framebuffer...
+			this->renderToFrameBuffer(this->default_framebuffer);
+			//...then render that framebuffer
+			this->renderFrameBuffer(this->default_framebuffer);
+		}
+
+		void Scene::renderToFrameBuffer(Data::FrameBuffer* framebuffer)
+		{
 			//Enable backface culling
 			glEnable(GL_CULL_FACE);
 
@@ -87,7 +95,7 @@ namespace Nilts
 			glDepthFunc(GL_LESS);
 
 			// Render to our framebuffer
-			glBindFramebuffer(GL_FRAMEBUFFER, this->render_framebuffer->gl_id);
+			glBindFramebuffer(GL_FRAMEBUFFER, framebuffer->gl_id);
 			glViewport(0, 0, 640 * 1.4, 480 * 1.4);
 
 			//Blank the screen
@@ -158,8 +166,6 @@ namespace Nilts
 				for (int count = 0; count < 4; count ++)
 					glDisableVertexAttribArray(count);
 			}
-
-			this->renderFrameBuffer(this->render_framebuffer);
 		}
 
 		void Scene::renderFrameBuffer(Data::FrameBuffer* framebuffer)
@@ -186,6 +192,8 @@ namespace Nilts
 			glBindTexture(GL_TEXTURE_2D, framebuffer->gl_tex_id);
 
 			framebuffer->shader->enable();
+
+			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
 			glDrawArrays(GL_TRIANGLES, 0, sizeof(GLfloat) * 6 * 3);
 

@@ -27,7 +27,7 @@ namespace Nilts
 		class Scene
 		{
 			public:
-				Data::FrameBuffer* render_framebuffer;
+				Data::FrameBuffer* default_framebuffer;
 
 				Camera* camera;
 
@@ -40,6 +40,7 @@ namespace Nilts
 				Scene();
 				void enable();
 				void render();
+				void renderToFrameBuffer(Data::FrameBuffer* framebuffer);
 				void renderFrameBuffer(Data::FrameBuffer* framebuffer);
 				void update();
 

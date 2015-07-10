@@ -9,6 +9,9 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
+#include "glbinding/gl/gl.h"
+#include "glbinding/Binding.h"
+
 using namespace std;
 
 namespace Nilts
@@ -25,6 +28,8 @@ namespace Nilts
 			//Tell the program to make an OpenGL 3.0 compatible context
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_ANY_PROFILE);
+			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, (int)gl::GL_TRUE);
 
 			//Create the window
 			this->glfw_window = glfwCreateWindow(this->width, this->height, this->window_title.c_str(), NULL, NULL);

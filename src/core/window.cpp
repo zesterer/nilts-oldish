@@ -22,6 +22,10 @@ namespace Nilts
 			//Start up GLFW
 			IO::test(glfwInit(), "Initialising GLFW", true);
 
+			//Tell the program to make an OpenGL 3.0 compatible context
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
 			//Create the window
 			this->glfw_window = glfwCreateWindow(this->width, this->height, this->window_title.c_str(), NULL, NULL);
 			IO::test(this->glfw_window != NULL, "Creating window", true);
@@ -31,9 +35,6 @@ namespace Nilts
 		{
 			IO::output("Enabling Window");
 
-			//Tell the program to make an OpenGL 3.0 compatible context
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 			glfwMakeContextCurrent(this->glfw_window);
 		}
 

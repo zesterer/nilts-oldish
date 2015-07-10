@@ -56,7 +56,7 @@ That said, Nilts makes use of cmake, a cross-platform build system, and I have b
 
 Navigate to a suitable directory, and run the following command:
 
-`git clone https://github.com/zesterer/nilts`
+`git clone https://github.com/zesterer/nilts --recursive`
 
 This will clone a copy of the Nilts repository into the current directory.
 

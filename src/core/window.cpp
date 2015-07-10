@@ -31,6 +31,9 @@ namespace Nilts
 		{
 			IO::output("Enabling Window");
 
+			//Tell the program to make an OpenGL 3.0 compatible context
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 			glfwMakeContextCurrent(this->glfw_window);
 		}
 

@@ -1,8 +1,19 @@
 #Specify the cmake version being used
 cmake_minimum_required(VERSION 2.6)
 
-#Require pkg-config to continue
-find_package(PkgConfig REQUIRED)
+#Require pkg-config to continue (Actually,
+#we don't need it yet. But keep it commented for future)
+#find_package(PkgConfig REQUIRED)
+
+
+
+
+#
+#   Nilts configuration
+#
+
+#Name of the project
+project(nilts)
 
 #Add a version number
 set (NILTS_VERSION_MAJOR 0)
@@ -12,28 +23,33 @@ set (NILTS_VERSION_RELEASE 0)
 #Turn on debug
 set (NILTS_DEBUG_ENABLED true)
 
-#Name of the project
-project(nilts)
+#Define a configuration file used by cmake
+configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main.h")
 
-#Tell the compiler to include -std=c++11
-add_definitions(-std=c++11 -Wall)
 
-#Libraries that can be imported with pkg-config
+
+
+#
+#   LIBRARIES
+#
+
+#Add GLFW
 set(GLFW_BUILD_DOCS FALSE)
 set(GLFW_BUILD_EXAMPLES FALSE)
 add_subdirectory(glfw)
 include_directories(glfw/include)
 
-#Libraries that can not be imported with pkg-config
+#Add GLBINDING
 set(GLBINDING_BUILD_DOCS FALSE)
 add_subdirectory(glbinding)
 include_directories(glbinding/source/glbinding/include)
 
-#Define a configuration file used by cmake
-configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main.h")
 
-#Add a location for a search path for headers
-include_directories("${PROJECT_BINARY_DIR}")
+
+
+#
+#   Source code
+#
 
 #All the directories containing header files
 include_directories(
@@ -65,6 +81,26 @@ src/data/meshedvoxelfield.cpp
 src/visual/data/geometry.cpp
 src/visual/data/framebuffer.cpp
 )
+
+
+
+
+#
+#   Compilation options
+#
+
+#Tell the compiler to include -std=c++11
+add_definitions(-std=c++11 -Wall)
+
+#Add a location for a search path for headers
+include_directories("${PROJECT_BINARY_DIR}")
+
+
+
+
+#
+#   Compilation
+#
 
 #Take the code and turn it into the executable
 add_executable(nilts ${SOURCE_FILES})

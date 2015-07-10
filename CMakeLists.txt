@@ -36,13 +36,13 @@ configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main
 #Add GLFW
 set(GLFW_BUILD_DOCS FALSE)
 set(GLFW_BUILD_EXAMPLES FALSE)
-add_subdirectory(glfw)
-include_directories(glfw/include)
+add_subdirectory(extern-glfw)
+include_directories(extern-glfw/include)
 
 #Add GLBINDING
 set(GLBINDING_BUILD_DOCS FALSE)
-add_subdirectory(glbinding)
-include_directories(glbinding/source/glbinding/include)
+add_subdirectory(extern-glbinding)
+include_directories(extern-glbinding/source/glbinding/include)
 
 
 

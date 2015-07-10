@@ -19,8 +19,15 @@ project(nilts)
 add_definitions(-std=c++11 -Wall)
 
 #Libraries that can be imported with pkg-config
-pkg_search_module(GLFW REQUIRED glfw3)
-include_directories(${GLFW_INCLUDE_DIRS})
+set(GLFW_BUILD_DOCS FALSE)
+set(GLFW_BUILD_EXAMPLES FALSE)
+add_subdirectory(glfw)
+include_directories(glfw/include)
+
+#Libraries that can not be imported with pkg-config
+set(GLBINDING_BUILD_DOCS FALSE)
+add_subdirectory(glbinding)
+include_directories(glbinding/source/glbinding/include)
 
 #Define a configuration file used by cmake
 configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main.h")

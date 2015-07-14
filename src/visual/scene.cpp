@@ -71,6 +71,7 @@ namespace Nilts
 			static World::Region* region = new World::Region();
 			region->generate();
 			region->field->extract(Nilts::Data::MeshingAlgorithm::SurfaceNets);
+			region->object->update();
 			this->registerObject(region->object);
 		}
 

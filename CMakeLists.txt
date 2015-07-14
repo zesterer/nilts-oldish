@@ -58,6 +58,10 @@ include_directories(
 "${PROJECT_SOURCE_DIR}/src/core/"
 "${PROJECT_SOURCE_DIR}/src/world/"
 "${PROJECT_SOURCE_DIR}/src/micro/"
+"${PROJECT_SOURCE_DIR}/src/engine/"
+"${PROJECT_SOURCE_DIR}/src/game/"
+"${PROJECT_SOURCE_DIR}/src/macro/"
+"${PROJECT_SOURCE_DIR}/src/render/"
 )
 
 set(SOURCE_FILES
@@ -80,6 +84,15 @@ src/data/voxelfield.cpp
 src/data/meshedvoxelfield.cpp
 src/visual/data/geometry.cpp
 src/visual/data/framebuffer.cpp
+src/core/inputmanager.cpp
+src/engine/entity.cpp
+src/engine/particle.cpp
+src/engine/realm.cpp
+src/engine/voxelcluster.cpp
+src/engine/voxelfield.cpp
+src/game/manager.cpp
+src/engine/voxelterrain.cpp
+src/engine/voxelclusterchild.cpp
 )
 
 

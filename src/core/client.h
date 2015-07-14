@@ -5,6 +5,8 @@
 #include "window.h"
 #include "visual/scene.h"
 #include "world/world.h"
+#include "game/manager.h"
+#include "inputmanager.h"
 
 namespace Nilts
 {
@@ -13,9 +15,10 @@ namespace Nilts
 		class Client
 		{
 			public:
-				World::World* world;
-
 				Window* window;
+				
+				InputManager* inputmanager;
+				Game::Manager* manager;
 
 				Visual::Scene* scene;
 

@@ -9,6 +9,12 @@
 
 namespace Nilts
 {
+	void State::tick()
+	{
+		this->pos += this->velocity;
+		this->rot += this->spin;
+	}
+	
 	int32 IntVec3::sum()
 	{
 		return this->x * this->y * this->z;

@@ -26,6 +26,9 @@ namespace Nilts
 
 	typedef long int32;
 	typedef unsigned long uint32;
+	
+	typedef long long int64;
+	typedef unsigned long long uint64;
 
 	//Floating-point types
 	typedef float float32;
@@ -64,9 +67,21 @@ namespace Nilts
 
 	struct State
 	{
-		glm::vec3 pos = glm::vec3(0.0, 0.0, 0.0);
-		glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0);
-		glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
+		public:
+			//The combined matrix
+			glm::mat4x4 matrix;
+			//The static state components
+			glm::vec3 pos = glm::vec3(0.0, 0.0, 0.0);
+			glm::vec3 rot = glm::vec3(0.0, 0.0, 0.0);
+			glm::vec3 scale = glm::vec3(1.0, 1.0, 1.0);
+			//The motion state components
+			glm::vec3 velocity = glm::vec3(0.0, 0.0, 0.0);
+			glm::vec3 spin = glm::vec3(0.0, 0.0, 0.0);
+			//The physical state components
+			float mass = 0.0;
+			glm::vec3 comass = glm::vec3(0.0, 0.0, 0.0);
+		
+			void tick();
 	};
 
 	struct Matrix

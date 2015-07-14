@@ -10,6 +10,7 @@
 
 //----LOCAL----
 #include "common/types.h"
+#include "inputmanager.h"
 
 using namespace std;
 
@@ -25,8 +26,10 @@ namespace Nilts
 				string window_title = "Nilts";
 
 				GLFWwindow* glfw_window;
+				
+				InputManager* inputmanager;
 
-				Window();
+				Window(InputManager* inputmanager);
 				void close();
 				bool refresh();
 				void enable();

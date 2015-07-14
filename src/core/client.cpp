@@ -12,11 +12,13 @@ namespace Nilts
 		Client::Client()
 		{
 			IO::output("Creating Client");
-
-			this->world = new World::World();
-
-			this->window = new Window();
+			
+			this->inputmanager = new InputManager();
+			
+			this->window = new Window(this->inputmanager);
 			this->window->enable();
+			
+			this->manager = new Game::Manager(this->inputmanager);
 
 			this->scene = new Visual::Scene();
 			this->scene->camera->window = this->window;
@@ -33,8 +35,8 @@ namespace Nilts
 		{
 			bool running = true;
 
-			//Tick the world
-			this->world->tick();
+			//Tick the game
+			this->manager->tick();
 
 			//Render the scene
 			this->scene->render();
@@ -45,7 +47,7 @@ namespace Nilts
 			if (!running) //If the client should close
 				this->close();
 
-            return running;
+            		return running;
 		}
 	}
 }

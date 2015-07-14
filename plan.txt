@@ -15,32 +15,112 @@
 Class Structure
 ===============
 
-ns = namespace, cl = class, st = struct
+ns = namespace, cl = class, st = struct, ~ = property
+[-] = not started, [P] = in progress, [F] = finished
 
-ns Nilts
-	ns Common
-		ns IO
-		ns Task
-	ns Core
-		cl Application
-	ns World
-		ns Terrain
-			st Voxel
-			st Region
-			cl Terrain
-		cl World
-		st VoxelPos
-		st EntityPos
-
-Ownership Structure
-===================
-
-ns = namespace, cl = class, st = struct
-
-cl Application
-	cl World
-		cl
-	cl
+[P] ns Nilts
+[P] 	ns Common
+[F] 		st State
+[F] 			~ Matrix4x4
+[F] 			~ Position
+[F] 			~ Orientation
+[F] 			~ Scale
+[F] 			~ Velocity
+[F] 			~ Spin
+[F] 			~ Mass
+[F] 			~ CentreOfMass
+[-] 	ns Core
+[-] 		cl Application
+[-] 			~ Running
+[-] 			~ Args
+[-] 		cl Window
+[-] 			~ InputManager
+[-] 		cl Client
+[-] 			~ GameManager
+[F] 	ns Engine
+[F] 		cl Voxel
+[F] 			~ Density
+[F] 			~ Type
+[F] 			~ Data
+[F] 		cl VoxelField
+[F] 			~ Voxel []
+[F] 		cl VoxelClusterChild : VoxelField
+[F] 			~ VoxelCluster
+[F] 			~ Position
+[F] 		cl VoxelCluster
+[F] 			~ VoxelField []
+[F] 		cl Entity
+[F] 			~ Id
+[F] 			~ Type
+[F] 			~ State
+[F] 		cl VoxelEntity : VoxelField, Entity
+[F] 		cl VoxelTerrain : VoxelCluster, Entity
+[F] 		cl Particle : Entity
+[F] 			~ Lifetime
+[F] 		cl Realm
+[F] 			cl VoxelTerrain
+[F] 			cl Entity []
+[F] 	ns Game
+[F] 		cl GameManager
+[F] 			~ Realm
+[F] 			~ Simulator
+[F] 			~ Actor []
+[F] 			~ InputManager
+[F] 		cl Actor
+[F] 			~ Properties
+[F] 			~ Entity
+[F] 		cl Character : Actor
+[F] 			~ has_ai
+[F] 		cl Player : Character
+[F] 	ns Macro
+[F] 		cl Region
+[F] 			~ Properties
+[F] 		cl Simulator
+[F] 			~ Region []
+[F] 			~ State
+[-] 	ns Render
+[-] 		ns Structures
+[-] 			st Vertex
+[-] 				~ Position
+[-] 				~ Colour
+[-] 				~ Normal
+[-] 			st Polygon
+[-] 				~ Vertex
+[-] 				~ Vertex
+[-] 				~ Vertex
+[-] 			cl Mesh
+[-] 				~ is_buffered
+[-] 				~ Polygon []
+[-] 				~ gl_id
+[-] 				~ draw_mode
+[-] 			st Light
+[-] 				~ Type
+[-] 				~ Position
+[-] 				~ Colour
+[-] 				~ Ambiance
+[-] 			st Material
+[-] 				~ Shininess
+[-] 				~ SpecularVolume
+[-] 				~ SpecularCap
+[-] 				~ Effects
+[-] 			st Shader
+[-] 				~ gl_id
+[-] 		cl EntityHandler
+[-] 			~ Id
+[-] 			~ Entity
+[-] 			~ Mesh
+[-] 		cl ParticleEntityHandler : EntityHandler
+[-] 		cl VoxelEntityHandler : EntityHandler
+[-] 		cl TerrainHandler
+[-] 			~ VoxelTerrain
+[-] 			~ VoxelMesh []
+[-] 		cl SceneManager
+[-] 			~ Realm
+[-] 			~ TerrainHandler
+[-] 			~ EntityHandler []
+[-] 		cl Scene
+[-] 			~ SceneManager
+		
 
 The 'Macro'
 ===========

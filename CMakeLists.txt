@@ -62,6 +62,7 @@ include_directories(
 "${PROJECT_SOURCE_DIR}/src/game/"
 "${PROJECT_SOURCE_DIR}/src/macro/"
 "${PROJECT_SOURCE_DIR}/src/render/"
+"${PROJECT_SOURCE_DIR}/src/render/structures/"
 )
 
 set(SOURCE_FILES
@@ -93,6 +94,9 @@ src/engine/voxelfield.cpp
 src/game/manager.cpp
 src/engine/voxelterrain.cpp
 src/engine/voxelclusterchild.cpp
+src/render/structures/polygon.cpp
+src/render/structures/material.cpp
+src/render/structures/shader.cpp
 )
 
 

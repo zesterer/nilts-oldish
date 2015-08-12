@@ -15,7 +15,7 @@ namespace Nilts
 				public:
 					Vertex a, b, c;
 				
-					void correctNormals(float curvature_bias);
+					void correctNormals(float curvature_bias = 0.0);
 					void invert();
 			};
 		}

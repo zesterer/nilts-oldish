@@ -37,12 +37,16 @@ configure_file("${PROJECT_SOURCE_DIR}/src/main.h.in" "${PROJECT_BINARY_DIR}/main
 set(GLFW_BUILD_DOCS FALSE)
 set(GLFW_BUILD_EXAMPLES FALSE)
 add_subdirectory(extern-glfw)
-include_directories(extern-glfw/include)
+include_directories("extern-glfw/include")
 
 #Add GLBINDING
 set(GLBINDING_BUILD_DOCS FALSE)
 add_subdirectory(extern-glbinding)
-include_directories(extern-glbinding/source/glbinding/include)
+include_directories("extern-glbinding/source/glbinding/include")
+
+#Add GLM
+set(GLM_BUILD_DOCS FALSE)
+include_directories("extern-glm")
 
 
 
@@ -97,6 +101,15 @@ src/engine/voxelclusterchild.cpp
 src/render/structures/polygon.cpp
 src/render/structures/material.cpp
 src/render/structures/shader.cpp
+src/render/structures/mesh.cpp
+src/engine/metadata.cpp
+src/render/scene.cpp
+src/render/meshobject.cpp
+src/render/renderable.cpp
+src/render/voxelfieldobject.cpp
+src/engine/camera.cpp
+src/render/structures/framebuffer.cpp
+src/render/renderer.cpp
 )
 
 
@@ -106,11 +119,19 @@ src/render/structures/shader.cpp
 #   Compilation options
 #
 
+#Build statically
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+SET(BUILD_SHARED_LIBRARIES OFF)
+#SET(CMAKE_EXE_LINKER_FLAGS "-static")
+
 #Tell the compiler to include -std=c++11
-add_definitions(-std=c++11 -Wall)
+add_definitions(-g -std=c++11 -Wall)
 
 #Add a location for a search path for headers
 include_directories("${PROJECT_BINARY_DIR}")
+
+#add_library(glfw STATIC IMPORTED)
+#add_library(glbinding STATIC IMPORTED)
 
 
 
@@ -123,5 +144,4 @@ include_directories("${PROJECT_BINARY_DIR}")
 add_executable(nilts ${SOURCE_FILES})
 
 #Link the final executable to the needed libraries
-target_link_libraries(nilts glfw ${GLFW_LIBRARIES})
-target_link_libraries(nilts glbinding ${GLBINDING_LIBRARIES})
+target_link_libraries(nilts glfw glbinding ${GLFW_LIBRARIES})

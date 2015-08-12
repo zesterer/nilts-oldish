@@ -17,6 +17,11 @@ namespace Nilts
 			
 			//Create the realm
 			this->realm = new Engine::Realm();
+			
+			//Create the scene renderer
+			this->scene = new Render::Scene(this->realm);
+			
+			//Do some stuff to the realm
 			this->realm->terrain = new Engine::VoxelTerrain(glm::ivec3(32, 32, 32));
 			this->realm->terrain->loadAt(glm::ivec3(0, 0, 0));
 		}
@@ -27,6 +32,9 @@ namespace Nilts
 			
 			//Tick the realm
 			this->realm->tick();
+			
+			//Tick the scene renderer
+			this->scene->tick();
 			
 			//IO::output("The time is " + std::to_string(this->time));
 			

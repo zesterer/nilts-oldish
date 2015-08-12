@@ -19,6 +19,7 @@ namespace Nilts
 				public:
 					gl::GLuint gl_id;
 
+					void enable();
 					void loadFromFiles(std::string vertex_file_path, std::string fragment_file_path);
 					void loadFromStrings(std::string VertexShaderCode, std::string FragmentShaderCode);
 			};

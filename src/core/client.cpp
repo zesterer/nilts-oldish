@@ -36,7 +36,8 @@ namespace Nilts
 			bool running = true;
 
 			//Tick the game
-			this->manager->tick();
+			//this->manager->tick();
+			//this->manager->realm->camera->keys(this->window);
 
 			//Render the scene
 			this->scene->render();

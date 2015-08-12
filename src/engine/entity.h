@@ -3,6 +3,7 @@
 
 //----LOCAL----
 #include "common/types.h"
+#include "metadata.h"
 
 namespace Nilts
 {
@@ -23,10 +24,14 @@ namespace Nilts
 		class Entity
 		{
 			public:
-				uint32 id;
 				State state;
 				EntityType type;
 				Realm* realm = nullptr;
+				
+				//Entity metadata. Could contain things like
+				//AI state data, or inventory data.
+				MetaData* render_metadata = nullptr;
+				MetaData* game_metadata = nullptr;
 			
 				void tick();
 		};

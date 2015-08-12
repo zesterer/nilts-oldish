@@ -10,6 +10,7 @@
 #include "actor.h"
 #include "core/inputmanager.h"
 #include "common/types.h"
+#include "render/scene.h"
 
 namespace Nilts
 {
@@ -19,6 +20,8 @@ namespace Nilts
 		{
 			public:
 				Engine::Realm* realm;
+				Render::Scene* scene;
+				
 				Macro::Simulator* simulator;
 				std::vector<Actor*> actors;
 				Core::InputManager* inputmanager;

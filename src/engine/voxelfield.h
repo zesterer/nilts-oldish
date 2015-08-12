@@ -10,6 +10,7 @@
 
 //----LOCAL----
 #include "voxel.h"
+#include "metadata.h"
 
 namespace Nilts
 {
@@ -25,6 +26,11 @@ namespace Nilts
 				
 				//The default external voxel
 				Voxel empty;
+				
+				//The metadata associated with this voxelfield.
+				//For example, this may contain renderer polygon data
+				MetaData* render_metadata = nullptr;
+				MetaData* game_metadata = nullptr;
 				
 				VoxelField(glm::ivec3 size);
 				Voxel* getAt(glm::ivec3 pos);

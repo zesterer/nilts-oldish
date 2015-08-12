@@ -1,6 +1,6 @@
 # The build directory
 build
-
+build-win32
 
 
 # Compiled Object files

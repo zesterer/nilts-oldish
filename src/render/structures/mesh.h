@@ -3,6 +3,7 @@
 
 //----STANDARD----
 #include "vector"
+#include "string"
 
 //----LIBRARY----
 #include "glbinding/gl/gl.h"
@@ -22,13 +23,13 @@ namespace Nilts
 				public:
 					std::vector<Polygon> polygons;
 					
-					bool buffered;
-					GLuint gl_id;
-					GLenum mode = GL_TRIANGLES;
+					bool buffered = false;
+					gl::GLuint gl_id;
+					gl::GLenum mode = gl::GL_TRIANGLES;
 					
-					bool loadFromOBJ(string filename);
+					bool loadFromOBJ(std::string filename);
 					void buffer();
-			}
+			};
 		}
 	}
 }

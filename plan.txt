@@ -19,7 +19,7 @@ ns = namespace, cl = class, st = struct, ~ = property
 [-] = not started, [P] = in progress, [F] = finished
 
 [P] ns Nilts
-[P] 	ns Common
+[F] 	ns Common
 [F] 		st State
 [F] 			~ Matrix4x4
 [F] 			~ Position
@@ -60,6 +60,7 @@ ns = namespace, cl = class, st = struct, ~ = property
 [F] 		cl Realm
 [F] 			cl VoxelTerrain
 [F] 			cl Entity []
+[-]			cl MetaData
 [F] 	ns Game
 [F] 		cl GameManager
 [F] 			~ Realm
@@ -105,15 +106,25 @@ ns = namespace, cl = class, st = struct, ~ = property
 [F] 				~ Effects
 [F] 			st Shader
 [F] 				~ gl_id
-[-] 		cl EntityHandler
-[-] 			~ Id
-[-] 			~ Entity
-[-] 			~ Mesh
-[-] 		cl ParticleEntityHandler : EntityHandler
-[-] 		cl VoxelEntityHandler : EntityHandler
-[-] 		cl TerrainHandler
-[-] 			~ VoxelTerrain
-[-] 			~ VoxelMesh []
+[-]			cl Renderable
+[F]			cl MeshObject
+[F]				~ Mesh
+[-]				~ Material
+[-]			cl EntityHandlerObject
+[-]				~ Entity
+[-]			cl VoxelEntityHandlerObject : EntityHandlerObject
+[-]				~ VoxelEntity
+[-]			cl TerrainHandlerObject
+[-]				~ VoxelHandlerObject []
+[P]			cl VoxelHandler : MeshObject
+[P]				~ VoxelField
+[P] 		cl EntityHandler
+[P] 			~ Entity
+[P] 		cl ParticleEntityHandler : EntityHandler
+[P] 		cl VoxelEntityHandler : VoxelHandler, EntityHandler
+[P] 		cl TerrainHandler
+[P] 			~ VoxelTerrain
+[P] 			~ VoxelMesh []
 [-] 		cl SceneManager
 [-] 			~ Realm
 [-] 			~ TerrainHandler

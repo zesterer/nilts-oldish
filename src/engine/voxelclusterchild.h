@@ -6,7 +6,7 @@
 #include "glm/vec3.hpp"
 
 //----LOCAL----
-#include "voxelfield.h"
+#include "voxelentity.h"
 
 namespace Nilts
 {

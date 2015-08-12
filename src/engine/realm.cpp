@@ -6,8 +6,17 @@ namespace Nilts
 {
 	namespace Engine
 	{
+		Realm::Realm()
+		{
+			this->camera = new Camera(this);
+			
+			this->terrain = new VoxelTerrain(glm::ivec3(32, 32, 32));
+		}
+		
 		void Realm::tick()
 		{
+			this->camera->update();
+			
 			this->time ++;
 		}
 		

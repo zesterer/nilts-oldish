@@ -1,5 +1,10 @@
 //----LOCAL----
 #include "mesh.h"
+#include "common/io.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "fstream"
+#include "face.h"
 
 namespace Nilts
 {
@@ -7,26 +12,26 @@ namespace Nilts
 	{
 		namespace Structures
 		{
-			bool BufferedMesh::loadFromOBJ(string filename)
+			bool Mesh::loadFromOBJ(std::string filename)
 			{
 				//Clear the polygon vector ready for new data
 				this->polygons.clear();
 
-				vector<glm::vec3> tmp_pos;
-				vector<glm::vec3> tmp_col;
-				vector<glm::vec2> tmp_tex;
-				vector<glm::vec3> tmp_norm;
-				vector<Face>      tmp_face;
+				std::vector<glm::vec3> tmp_pos;
+				std::vector<glm::vec3> tmp_col;
+				std::vector<glm::vec2> tmp_tex;
+				std::vector<glm::vec3> tmp_norm;
+				std::vector<Face>      tmp_face;
 
 				//Open the file
-				ifstream file (filename);
+				std::ifstream file (filename);
 
 				//Return false if the read operation failed
 				if (!IO::test(file.is_open(), "Opening '" + filename + "'"))
 					return false;
 
 				//We'll be using this later...
-				string line;
+				std::string line;
 
 				//Keep reading file lines from the stream
 				while (getline(file, line))
@@ -193,21 +198,21 @@ namespace Nilts
 				return true;
 			}
 
-			void BufferedMesh::buffer()
+			void Mesh::buffer()
 			{
 				//Clear any existing memory before rebuffering
-				glDeleteVertexArrays(1, &this->gl_id);
+				gl::glDeleteVertexArrays(1, &this->gl_id);
 
 				//Create the vertex array id and bind it
-				glGenVertexArrays(1, &this->gl_id);
-				glBindVertexArray(this->gl_id);
+				gl::glGenVertexArrays(1, &this->gl_id);
+				gl::glBindVertexArray(this->gl_id);
 
 				//Create the vertex buffer id and bind it
-				glGenBuffers(1, &this->gl_id);
-				glBindBuffer(GL_ARRAY_BUFFER, this->gl_id);
+				gl::glGenBuffers(1, &this->gl_id);
+				gl::glBindBuffer(gl::GL_ARRAY_BUFFER, this->gl_id);
 
 				//Pass the vertex position data to GL (the graphics card)
-				glBufferData(GL_ARRAY_BUFFER, this->polygons.size() * sizeof(Polygon), &this->polygons[0], GL_STATIC_DRAW);
+				gl::glBufferData(gl::GL_ARRAY_BUFFER, this->polygons.size() * sizeof(Polygon), &this->polygons[0], gl::GL_STATIC_DRAW);
 
 				this->buffered = true;
 				IO::output("Buffered model with " + to_string(this->polygons.size()) + " polygons.");

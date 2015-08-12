@@ -13,6 +13,13 @@ namespace Nilts
 	{
 		namespace Structures
 		{
+			void Shader::enable()
+			{
+				//IO::output("Enabled shader program");
+
+				gl::glUseProgram(this->gl_id);
+			}
+			
 			void Shader::loadFromFiles(std::string vertex_file_path, std::string fragment_file_path)
 			{
 				// Read the Vertex Shader code from the file

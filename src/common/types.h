@@ -7,6 +7,10 @@
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 namespace Nilts
 {
 	/*
@@ -26,7 +30,7 @@ namespace Nilts
 
 	typedef long int32;
 	typedef unsigned long uint32;
-	
+
 	typedef long long int64;
 	typedef unsigned long long uint64;
 
@@ -80,8 +84,9 @@ namespace Nilts
 			//The physical state components
 			float mass = 0.0;
 			glm::vec3 comass = glm::vec3(0.0, 0.0, 0.0);
-		
+
 			void tick();
+			void update();
 	};
 
 	struct Matrix

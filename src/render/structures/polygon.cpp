@@ -7,7 +7,7 @@ namespace Nilts
 	{
 		namespace Structures
 		{
-			void Polygon::correctNormals(float curvature_bias = 0.0)
+			void Polygon::correctNormals(float curvature_bias)
 			{
 				glm::vec3 n0 = glm::cross(this->b.pos - this->a.pos, this->c.pos - this->a.pos);
 				n0 /= glm::length(n0);
